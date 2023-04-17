@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>League Stats</title>
+  </head>
+  <body>
+    <h1>League Stats</h1>
+    <form method="POST" action="{{ url_for('get_stats') }}">
+      <label for="summoner_name">Enter your summoner name:</label>
+      <input type="text" id="summoner_name" name="summoner_name" required>
+      <button type="submit">Get Stats</button>
+    </form>
+  </body>
+</html>
