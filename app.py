@@ -8,6 +8,7 @@ app = Flask(__name__)
 def index():
     if request.method == "POST":
         summoner_name = request.form["summoner_name"]
+        
         data = get_champion_mastery_data(api_key, summoner_name)
         while data == -1: 
             summoner_name = str(input("Summoner does not exist. Please try again: "))
@@ -17,7 +18,6 @@ def index():
 
         # print table
         table = PrettyTable()
-        table.junction_char = "o"
         table.add_column("Champion", data["champion_names"])
         table.add_column("Mastery Level", data["champion_levels"])
         table.add_column("Mastery Points", data["champion_points"])
@@ -30,7 +30,7 @@ def index():
         if user_selected_sort == "Last Played":
             user_selected_sort = "Last Played(Days)"
 
-        if user_selected_sort == "Mastery Level" or user_selected_sort == "Last Played":
+        if user_selected_sort == "Mastery Level" or user_selected_sort == "Last Played" or user_selected_sort == "Mastery Points":
             table.reversesort = True
 
         table.sortby = user_selected_sort

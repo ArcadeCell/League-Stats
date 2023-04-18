@@ -30,8 +30,10 @@ while ongoing:
     if user_sort == "Last Played":
         user_sort = "Last Played(Days)"
 
-    if user_sort == "Mastery Level" or user_sort == "Last Played":
+    if user_sort == "Mastery Level" or user_sort == "Last Played" or user_sort == "Mastery Points":
         table.reversesort = True
+    else:
+        table.reversesort = False   
 
     table.sortby = user_sort
     print(table)
