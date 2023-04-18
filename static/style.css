@@ -18,6 +18,7 @@ th {
     padding-bottom: 12px;
     border-bottom: 3px solid #ddd;
     font-weight: bold;
+    text-shadow: 2px 2px 4px black; /* Set the horizontal offset, vertical offset, blur radius, and color of the shadow */
 }
 
 h1{
@@ -26,6 +27,7 @@ h1{
     font-size: 45px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: bolder;
+    text-shadow: 2px 2px 4px black; /* Set the horizontal offset, vertical offset, blur radius, and color of the shadow */
 }
 
 body {
@@ -41,20 +43,31 @@ body {
     width: 300px;
     padding: 10px 0px;
     border-radius: 3px;
-    border: none;
 }
 
-input[type="text"], select{
+input[type="text"]{
     font-size: 1.5rem;
     width: 100%;
     padding: 1rem;
     border-radius: 5px;
-    border: none;
+    border: 3px solid #000000; 
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     margin-bottom: 2rem;
     font-family: 'Open Sans', sans-serif;
     text-indent: 10px;
     color: black;
     background-color: white;
+}
+
+input[type="text"]:hover, select:hover{
+    border-color: #15abec; /* Set the border color you want to glow */
+    box-shadow: 0 0 5px #15abec; /* Add a box-shadow effect to make it appear glowing */
+}
+
+input[type="text"]:focus, select:focus{
+    outline: none;
+    border-color: #15abec; /* Set the border color you want to glow */
+    box-shadow: 0 0 5px #15abec; /* Add a box-shadow effect to make it appear glowing */
 }
   
 select{
@@ -62,7 +75,8 @@ select{
     width: 300px;
     padding: 10px 0px;
     border-radius: 3px;
-    border: none;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border: 3px solid #000000; 
 }
 
 form {
@@ -94,6 +108,7 @@ option{
     margin-bottom: 20px;
     cursor: pointer;
     transition: background-color 0.5s ease, transform 0.5s ease;
+    border: 3px solid #000000; 
 }
 
 .button:hover{
@@ -106,6 +121,11 @@ option{
     top: 10;
     left: 10;
     height: 10hv;
+    transition: transform 0.5s ease;
+}
+
+#rank_7_icon:hover{
+    transform: scale(1.2);
 }
 
 

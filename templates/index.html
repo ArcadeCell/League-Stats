@@ -8,19 +8,19 @@
 <body>
     <img src="https://th.bing.com/th/id/R.aa4ae534dffd7e6d526dbfe6713e109a?rik=peY7ffoMN3VZeg&pid=ImgRaw&r=0" alt="Rank 7 Icon" id="rank_7_icon">
     <h1>League of Legends Summoner Search</h1>
+
     <form method="POST">
-        <input type="text" id="summoner_name" name="summoner_name" placeholder="Search Summoner" required>
-
-        <label for="sort_by">Sort by:</label>
+        <label for="summoner_name">Summoner Name</label>
+        <input type="text" id="summoner_name" name="summoner_name" placeholder="Search Summoner" required value="{{ request.form['summoner_name']|default('') }}">
+        <label for="sort_by">Sort by</label>
         <select name="sort_by">
-            <option value="Champion">Champion</option>
-            <option value="Mastery Level">Mastery Level</option>
-            <option value="Mastery Points">Mastery Points</option>
-            <option value="Last Played">Last Played</option>
-            <option value="Mastery Points Until Next Level">Mastery Points Until Next Level</option>
-            <option value="Chest Granted">Chest Granted</option>
+            <option value="Champion" {% if request.form['sort_by'] == 'Champion' %} selected {% endif %}>Champion</option>
+            <option value="Mastery Level" {% if request.form['sort_by'] == 'Mastery Level' %} selected {% endif %}>Mastery Level</option>
+            <option value="Mastery Points" {% if request.form['sort_by'] == 'Mastery Points' %} selected {% endif %}>Mastery Points</option>
+            <option value="Last Played" {% if request.form['sort_by'] == 'Last Played' %} selected {% endif %}>Last Played</option>
+            <option value="Mastery Points Until Next Level" {% if request.form['sort_by'] == 'Mastery Points Until Next Level' %} selected {% endif %}>Mastery Points Until Next Level</option>
+            <option value="Chest Granted" {% if request.form['sort_by'] == 'Chest Granted' %} selected {% endif %}>Chest Granted</option>
         </select><br><br>
-
         <input class="button" type="submit" value="Submit">
     </form>
 
