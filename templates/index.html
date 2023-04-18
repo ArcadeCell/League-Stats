@@ -6,8 +6,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <img src="https://th.bing.com/th/id/R.aa4ae534dffd7e6d526dbfe6713e109a?rik=peY7ffoMN3VZeg&pid=ImgRaw&r=0" alt="Rank 7 Icon" id="rank_7_icon">
+    <!-- <img src="https://th.bing.com/th/id/R.aa4ae534dffd7e6d526dbfe6713e109a?rik=peY7ffoMN3VZeg&pid=ImgRaw&r=0" alt="Rank 7 Icon" id="rank_7_icon"> -->
     <h1>League of Legends Summoner Search</h1>
+    <img src="https://cdn.boop.pl/uploads/2021/06/Flag_Targon_1_Inventory.png" alt="clash banner" id="left_banner" class="side_banner">
+    <img src="https://1.bp.blogspot.com/-UHpLjdn6ics/YJwoRKmVM1I/AAAAAAAB5z8/Wdg7uuRQt3wQhTx7N2FARQdXD69xMZHxACLcBGAsYHQ/s750/Flag_Bilgewater_1_Profile.png" alt="clash banner" id="right_banner" class="side_banner">
 
     <form method="POST">
         <label for="summoner_name">Summoner Name</label>
@@ -21,7 +23,7 @@
             <option value="Mastery Points Until Next Level" {% if request.form['sort_by'] == 'Mastery Points Until Next Level' %} selected {% endif %}>Mastery Points Until Next Level</option>
             <option value="Chest Granted" {% if request.form['sort_by'] == 'Chest Granted' %} selected {% endif %}>Chest Granted</option>
         </select><br><br>
-        <input class="button" type="submit" value="Submit">
+        <input class="button" type="submit" value="Search">
     </form>
 
     {% if table %}

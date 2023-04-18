@@ -2,14 +2,14 @@ table {
     font-family: Verdana, sans-serif;
     border-collapse: collapse;
     width: 100%;
-    padding: 20px;
+    padding: 10px;
     color: white;
 }
 
 td, th {
-    padding: 5px;
+    padding: 8px 0;
     text-align: center;
-    background-color: #635985;
+    background-color: #3c79ae;
     font-size: 20px;
 }
 
@@ -23,18 +23,20 @@ th {
 
 h1{
     text-align: center;
-    color: rgb(255, 123, 123);
+    color: rgb(59, 255, 147);
     font-size: 45px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: bolder;
     text-shadow: 2px 2px 4px black; /* Set the horizontal offset, vertical offset, blur radius, and color of the shadow */
+    position: relative;
+    z-index: 1;
 }
 
 body {
     display: block;
     justify-content: center;
     align-items: center;
-    padding: 0 10vh 10vh;
+    padding: 0 10vh 5vh;
     background-color: #393053;
 }
 
@@ -57,6 +59,7 @@ input[type="text"]{
     text-indent: 10px;
     color: black;
     background-color: white;
+    display: inline-block;
 }
 
 input[type="text"]:hover, select:hover{
@@ -87,8 +90,9 @@ form {
 }
 
 label{
+    font-size: 25px;
     margin: 5px;
-    font: 20px Arial, Helvetica, sans-serif;
+    font-family: Helvetica, sans-serif;
     color: white;
 }
 
@@ -100,15 +104,15 @@ option{
     background-color: #546eed;
     border: none;
     border-radius: 15px;
-    padding: 10px 15px;
+    padding: 10px 20px;
     color: white;
     text-align: center;
-    display: inline-block;
-    font-size: 30px;
+    font-size: 25px;
     margin-bottom: 20px;
     cursor: pointer;
     transition: background-color 0.5s ease, transform 0.5s ease;
     border: 3px solid #000000; 
+    width: 10rem;
 }
 
 .button:hover{
@@ -116,16 +120,26 @@ option{
     transform: scale(1.1);
 }
 
-#rank_7_icon {
+#left_banner{
     position: absolute;
-    top: 10;
-    left: 10;
-    height: 10hv;
-    transition: transform 0.5s ease;
+    top: 0;
+    left: 0;
+    width: 30vh;
+    height: 50vh;
 }
 
-#rank_7_icon:hover{
-    transform: scale(1.2);
+#right_banner{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30vh;
+    height: 40vh;
+}
+
+@media (max-width: 768px) {
+    .side_banner {
+        width: 5%; /* set a smaller width for smaller screens */
+    }
 }
 
 
