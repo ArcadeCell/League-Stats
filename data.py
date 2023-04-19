@@ -1,7 +1,7 @@
 import requests
 import datetime
 
-api_key = "RGAPI-c7a42876-6dbf-4f4a-8d89-9bb933a53f97"
+api_key = "RGAPI-8952138c-0c21-44eb-829d-b92d23b3fc85"
 
 # function to get summoner mastery data
 def get_champion_mastery_data(api_key, summoner_name):
