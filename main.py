@@ -11,7 +11,7 @@ while ongoing:
         data = get_champion_mastery_data(api_key, summoner_name)
         
     data = organize_champion_data(data, champion_dict)
-
+    
     # print table
     table = PrettyTable()
     table.junction_char = "o"

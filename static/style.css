@@ -23,9 +23,9 @@ th {
 
 h1{
     text-align: center;
-    color: rgb(59, 255, 147);
+    color: rgb(242, 255, 94);
     font-size: 45px;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: Oswald, sans-serif;
     font-weight: bolder;
     text-shadow: 2px 2px 4px black; /* Set the horizontal offset, vertical offset, blur radius, and color of the shadow */
     position: relative;
@@ -38,19 +38,23 @@ body {
     align-items: center;
     padding: 0 10vh 5vh;
     background-color: #393053;
+    background-image: url("https://cdn.mobalytics.gg/assets/lol/images/page-background/home/home-v3.jpg");
+    background-size: 100vh;
+    background-repeat: repeat;
+    padding-bottom: 100vh
 }
 
 #summoner_name{
     font-size: 15px;
     width: 300px;
-    padding: 10px 0px;
+    padding: 10px;
     border-radius: 3px;
 }
 
 input[type="text"]{
     font-size: 1.5rem;
     width: 100%;
-    padding: 1rem;
+    padding: 2rem;
     border-radius: 5px;
     border: 3px solid #000000; 
     transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -120,25 +124,31 @@ option{
     transform: scale(1.1);
 }
 
-#left_banner{
+.side_banner{
     position: absolute;
     top: 0;
-    left: 0;
     width: 30vh;
+    height: 50vh;
+    transition: transform 0.5s ease;
+}
+
+#left_banner{
+    left: 0;
     height: 50vh;
 }
 
 #right_banner{
-    position: absolute;
-    top: 0;
     right: 0;
-    width: 30vh;
     height: 40vh;
+}
+
+#left_banner:hover, #right_banner:hover{
+    transform: scale(1.1);
 }
 
 @media (max-width: 768px) {
     .side_banner {
-        width: 5%; /* set a smaller width for smaller screens */
+        width: 10vh; /* set a smaller width for smaller screens */
     }
 }
 

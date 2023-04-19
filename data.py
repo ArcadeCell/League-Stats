@@ -18,7 +18,7 @@ def get_champion_mastery_data(api_key, summoner_name):
     response = requests.get(url)
     data = response.json()
     return data
-
+    
 # function to organize summoner mastery data
 def organize_champion_data(data, champion_dict):
     champion_ids = []
