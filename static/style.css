@@ -164,6 +164,12 @@ option{
     label{
         font-size: 20px;
     }
+    table{
+        width: 100%;
+    }
+    th, td{
+        font-size: 15px;
+    }
 }
 
 
