@@ -41,7 +41,7 @@ body {
     background-image: url("https://cdn.mobalytics.gg/assets/lol/images/page-background/home/home-v3.jpg");
     background-size: 100vh;
     background-repeat: repeat;
-    padding-bottom: 100vh
+    padding-bottom: 50vh
 }
 
 #summoner_name{
@@ -127,29 +127,35 @@ option{
 .side_banner{
     position: absolute;
     top: 0;
-    width: 30vh;
-    height: 50vh;
+    width: 22%; /* Set the initial width of the image to 100% of its container */
+    height: auto;
     transition: transform 0.5s ease;
+    opacity: 80%;
 }
 
 #left_banner{
     left: 0;
-    height: 50vh;
 }
 
 #right_banner{
     right: 0;
-    height: 40vh;
 }
 
 #left_banner:hover, #right_banner:hover{
     transform: scale(1.1);
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .side_banner {
-        width: 10vh; /* set a smaller width for smaller screens */
+      max-width: 50%; /* Scale the image down to 50% of its container on screens narrower than 768px */
     }
 }
+
+@media screen and (max-width: 480px) {
+    .side_banner {
+      max-width: 30%; /* Scale the image down to 30% of its container on screens narrower than 480px */
+    }
+}
+
 
 
