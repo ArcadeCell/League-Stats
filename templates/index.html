@@ -29,16 +29,17 @@
                         <option value="Chest Granted" {% if request.form['sort_by'] == 'Chest Granted' %} selected {% endif %}>Chest Granted</option>
                     </select><br>
                 </div>
-            </div>            
+            </div>
+                          
             <input class="button" type="submit" value="Search">
         </form>
 
         {% if error_message %}
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <div class="error">{{ error_message }}</div>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <div class="alert" role="alert">
+                <div>{{ error_message }}</div>
             </div>
         {% endif %}
+
 
         {% if table %}
             {{ table | safe }}

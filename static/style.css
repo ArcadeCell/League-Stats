@@ -148,15 +148,18 @@ option{
     transform: scale(1.1);
 }
 
-
 .error{
     font-family: "Montserrat", sans-serif;
 }
 
+.btn-close{
+    font-size: x-small;
+}
+
 .alert{
-    width: 70%;
+    width: 50%;
     color: red;
-    font-size: calc(0.8vw + 0.8vh);
+    font-size: calc(1vw + 1vh);
     font-weight: bold;
     text-align: center;
     margin-top: 10vh;
@@ -169,10 +172,6 @@ option{
     padding-right: 1.8rem;
     display: block;
     border: 1px solid black;
-}
-
-.btn-close {
-    font-size: 0.6rem;
 }
 
 .mycontainer {
