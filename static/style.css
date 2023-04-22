@@ -1,3 +1,7 @@
+html{
+    box-sizing: border-box;
+}
+
 table {
     font-family: Verdana, sans-serif;
     border-collapse: collapse;
@@ -22,9 +26,10 @@ th {
 }
 
 h1{
+    margin: calc(1.7vw + 1.7vh) 0;
     text-align: center;
-    color: rgb(242, 255, 94);
-    font-size: 45px;
+    color: rgb(255, 236, 94);
+    font-size: calc(1.7vw + 1.7vh);
     font-family: Oswald, sans-serif;
     font-weight: bolder;
     text-shadow: 2px 2px 4px black; /* Set the horizontal offset, vertical offset, blur radius, and color of the shadow */
@@ -41,49 +46,49 @@ body {
     background-image: url("https://cdn.mobalytics.gg/assets/lol/images/page-background/home/home-v3.jpg");
     background-size: 100vh;
     background-repeat: repeat;
-    padding-bottom: 50vh
+    padding-bottom: 25vh;
 }
 
 #summoner_name{
     font-size: 15px;
     width: 300px;
     padding: 10px;
+    font-family: Helvetica, sans-serif;
     border-radius: 3px;
 }
 
 input[type="text"]{
     font-size: 1.5rem;
-    width: 100%;
-    padding: 2rem;
     border-radius: 5px;
     border: 3px solid #000000; 
     transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    margin-bottom: 2rem;
-    font-family: 'Open Sans', sans-serif;
+    font-family: Helvetica, sans-serif;
     text-indent: 10px;
     color: black;
     background-color: white;
-    display: inline-block;
+    height: 45px;
 }
 
 input[type="text"]:hover, select:hover{
-    border-color: #15abec; /* Set the border color you want to glow */
-    box-shadow: 0 0 5px #15abec; /* Add a box-shadow effect to make it appear glowing */
+    border-color: #15abec; 
+    box-shadow: 0 0 5px #15abec; 
 }
 
 input[type="text"]:focus, select:focus{
     outline: none;
-    border-color: #15abec; /* Set the border color you want to glow */
-    box-shadow: 0 0 5px #15abec; /* Add a box-shadow effect to make it appear glowing */
+    border-color: #15abec; 
+    box-shadow: 0 0 5px #15abec; 
 }
   
 select{
     font-size: 15px;
     width: 300px;
     padding: 10px 0px;
+    border: 3px solid #000000; 
     border-radius: 3px;
     transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    border: 3px solid #000000; 
+    font-family: Helvetica, sans-serif;
+    height: 45px;
 }
 
 form {
@@ -94,10 +99,10 @@ form {
 }
 
 label{
-    font-size: 25px;
-    margin: 5px;
+    font-size: calc(1.2vw + 1.2vh);
     font-family: Helvetica, sans-serif;
     color: white;
+    display: block;
 }
 
 option{
@@ -107,30 +112,28 @@ option{
 .button{
     background-color: #546eed;
     border: none;
-    border-radius: 15px;
-    padding: 10px 20px;
+    border-radius: calc(1vw + 1vh);
+    padding: 5px 15px;
     color: white;
     text-align: center;
-    font-size: 25px;
+    font-size: calc(1.2vw + 1.2vh);
     margin-bottom: 20px;
     cursor: pointer;
     transition: background-color 0.5s ease, transform 0.5s ease;
     border: 3px solid #000000; 
-    width: 10rem;
+    width: calc(10vw + 10vh);
 }
 
 .button:hover{
-    background-color: #ce3cfe;
-    transform: scale(1.1);
+    background-color: #283ee3;
 }
 
 .side_banner{
     position: absolute;
     top: 0;
-    width: 22%; /* Set the initial width of the image to 100% of its container */
+    width: 14%; 
     height: auto;
     transition: transform 0.5s ease;
-    opacity: 80%;
 }
 
 #left_banner{
@@ -145,25 +148,45 @@ option{
     transform: scale(1.1);
 }
 
-@media screen and (max-width: 768px) {
-    .side_banner {
-      max-width: 50%; /* Scale the image down to 50% of its container on screens narrower than 768px */
-    }
+
+.error{
+    font-family: "Montserrat", sans-serif;
 }
 
-@media screen and (max-width: 480px) {
-    .side_banner {
-      max-width: 30%; /* Scale the image down to 30% of its container on screens narrower than 480px */
-    }
+.alert{
+    width: 70%;
+    color: red;
+    font-size: calc(0.8vw + 0.8vh);
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10vh;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(255, 242, 145);
+    color: black;
+    border-radius: 0.3rem;
+    padding: 0.75rem;
+    padding-right: 1.8rem;
+    display: block;
+    border: 1px solid black;
 }
 
-@media screen and (max-width: 1300px) {
-    h1 {
-        font-size: 26px;
-    }
-    label{
-        font-size: 20px;
-    }
+.btn-close {
+    font-size: 0.6rem;
+}
+
+.mycontainer {
+    margin: 0 5%;
+}
+
+.big_container {
+    display: flex;
+    width: 55vw;
+    justify-content: space-around;
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 1450px) {
     table{
         width: 100%;
     }
@@ -172,4 +195,24 @@ option{
     }
 }
 
+@media (max-width: 1200px){
+    .big_container{
+        flex-direction: column;
+        align-items: center;
+    }
+    .mycontainer {
+        margin: 2% 5%;
+    }
+}
 
+@media (max-width: 845px) {
+    .side_banner {
+      max-width: 50%; 
+    }
+}
+
+@media (max-width: 670px) {
+    .side_banner {
+      max-width: 30%; 
+    }
+}

@@ -6,14 +6,16 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
+    error_message = None
+
     if request.method == "POST":
         summoner_name = request.form["summoner_name"]
         
         data = get_champion_mastery_data(api_key, summoner_name)
-        while data == -1: 
-            summoner_name = str(input("Summoner does not exist. Please try again: "))
-            data = get_champion_mastery_data(api_key, summoner_name)
-        
+        if data == -1:
+            error_message = "Summoner not found. Please check spelling."
+            return render_template("index.html", error_message = error_message)
+
         data = organize_champion_data(data, champion_dict)
 
         # print table

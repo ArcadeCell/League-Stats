@@ -1,7 +1,7 @@
 import requests
 import datetime
 
-api_key = "RGAPI-8952138c-0c21-44eb-829d-b92d23b3fc85"
+api_key = "RGAPI-2f5d9fa9-62cf-4212-9d3a-922a3aea1e77"
 
 # function to get summoner mastery data
 def get_champion_mastery_data(api_key, summoner_name):
@@ -13,7 +13,7 @@ def get_champion_mastery_data(api_key, summoner_name):
     name_data = response.json()
     summoner_id = name_data["id"]
 
-    # use Encrypted summoner ID to request and store summoner mastery data
+    # use Encrypted summoner ID to request, store, and return summoner data
     url = f"https://na1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/{summoner_id}?api_key={api_key}"
     response = requests.get(url)
     data = response.json()

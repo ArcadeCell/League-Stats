@@ -3,34 +3,46 @@
 <head>
     <title>Champion Mastery</title>
     <link rel="icon" type="image/png" href="https://th.bing.com/th/id/R.aa4ae534dffd7e6d526dbfe6713e109a?rik=peY7ffoMN3VZeg&pid=ImgRaw&r=0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-    <!-- <img src="https://th.bing.com/th/id/R.aa4ae534dffd7e6d526dbfe6713e109a?rik=peY7ffoMN3VZeg&pid=ImgRaw&r=0" alt="Rank 7 Icon" id="rank_7_icon"> -->
-    <h1>League of Legends Summoner Search</h1>
-    <img src="https://cdn.boop.pl/uploads/2021/06/Flag_Targon_1_Inventory.png" alt="clash banner" id="left_banner" class="side_banner">
-    <img src="https://1.bp.blogspot.com/-UHpLjdn6ics/YJwoRKmVM1I/AAAAAAAB5z8/Wdg7uuRQt3wQhTx7N2FARQdXD69xMZHxACLcBGAsYHQ/s750/Flag_Bilgewater_1_Profile.png" alt="clash banner" id="right_banner" class="side_banner">
+        <h1>League of Legends Summoner Search</h1>
+        <img src="https://cdn.boop.pl/uploads/2021/06/Flag_Targon_1_Inventory.png" alt="clash banner" id="left_banner" class="side_banner">
+        <img src="https://1.bp.blogspot.com/-UHpLjdn6ics/YJwoRKmVM1I/AAAAAAAB5z8/Wdg7uuRQt3wQhTx7N2FARQdXD69xMZHxACLcBGAsYHQ/s750/Flag_Bilgewater_1_Profile.png" alt="clash banner" id="right_banner" class="side_banner">
 
-    <form method="POST">
-        <label for="summoner_name">Summoner Name</label>
-        <input type="text" id="summoner_name" name="summoner_name" placeholder="Search Summoner" required value="{{ request.form['summoner_name']|default('') }}">
-        <label for="sort_by">Sort by</label>
-        <select name="sort_by">
-            <option value="Champion" {% if request.form['sort_by'] == 'Champion' %} selected {% endif %}>Champion</option>
-            <option value="Mastery Level" {% if request.form['sort_by'] == 'Mastery Level' %} selected {% endif %}>Mastery Level</option>
-            <option value="Mastery Points" {% if request.form['sort_by'] == 'Mastery Points' %} selected {% endif %}>Mastery Points</option>
-            <option value="Last Played" {% if request.form['sort_by'] == 'Last Played' %} selected {% endif %}>Last Played</option>
-            <option value="Mastery Points Until Next Level" {% if request.form['sort_by'] == 'Mastery Points Until Next Level' %} selected {% endif %}>Mastery Points Until Next Level</option>
-            <option value="Chest Granted" {% if request.form['sort_by'] == 'Chest Granted' %} selected {% endif %}>Chest Granted</option>
-        </select><br><br>
-        <input class="button" type="submit" value="Search">
-    </form>
+        <form method="POST">
+            <div class="big_container">
+                <div id="summoner_block" class="mycontainer">
+                    <label for="summoner_name">Summoner Name</label>
+                    <input type="text" id="summoner_name" name="summoner_name" placeholder="Search Summoner" required value="{{ request.form['summoner_name']|default('') }}">
+                </div>
+                <div id="sort_block" class="mycontainer">
+                    <label for="sort_by">Sort by</label>
+                    <select name="sort_by">
+                        <option value="Champion" {% if request.form['sort_by'] == 'Champion' %} selected {% endif %}>Champion</option>
+                        <option value="Mastery Level" {% if request.form['sort_by'] == 'Mastery Level' %} selected {% endif %}>Mastery Level</option>
+                        <option value="Mastery Points" {% if request.form['sort_by'] == 'Mastery Points' %} selected {% endif %}>Mastery Points</option>
+                        <option value="Last Played" {% if request.form['sort_by'] == 'Last Played' %} selected {% endif %}>Last Played</option>
+                        <option value="Mastery Points Until Next Level" {% if request.form['sort_by'] == 'Mastery Points Until Next Level' %} selected {% endif %}>Mastery Points Until Next Level</option>
+                        <option value="Chest Granted" {% if request.form['sort_by'] == 'Chest Granted' %} selected {% endif %}>Chest Granted</option>
+                    </select><br>
+                </div>
+            </div>            
+            <input class="button" type="submit" value="Search">
+        </form>
 
-    {% if table %}
-        {{ table | safe }}
-    {% endif %}
+        {% if error_message %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <div class="error">{{ error_message }}</div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endif %}
 
+        {% if table %}
+            {{ table | safe }}
+        {% endif %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 </body>
 </html>
-
