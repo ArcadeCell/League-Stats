@@ -1,5 +1,6 @@
 html{
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 table {
@@ -41,12 +42,11 @@ body {
     display: block;
     justify-content: center;
     align-items: center;
-    padding: 0 10vh 5vh;
+    padding: 0 10vh;
     background-color: #393053;
     background-image: url("https://cdn.mobalytics.gg/assets/lol/images/page-background/home/home-v3.jpg");
     background-size: 100vh;
     background-repeat: repeat;
-    padding-bottom: 25vh;
 }
 
 #summoner_name{
@@ -110,22 +110,22 @@ option{
 }
 
 .button{
-    background-color: #546eed;
+    background-color: rgb(170, 74, 226);
     border: none;
     border-radius: calc(1vw + 1vh);
     padding: 5px 15px;
     color: white;
     text-align: center;
     font-size: calc(1.2vw + 1.2vh);
-    margin-bottom: 20px;
-    cursor: pointer;
-    transition: background-color 0.5s ease, transform 0.5s ease;
+    margin-bottom: 3rem;
+    transition: background-color 0.5s ease;
     border: 3px solid #000000; 
-    width: calc(10vw + 10vh);
+    width: 10rem;
+    font-weight: bold;
 }
 
 .button:hover{
-    background-color: #283ee3;
+    background-color: rgb(149, 57, 203);
 }
 
 .side_banner{
@@ -133,7 +133,7 @@ option{
     top: 0;
     width: 14%; 
     height: auto;
-    transition: transform 0.5s ease;
+    /* transition: transform 0.5s ease; */
 }
 
 #left_banner{
@@ -144,34 +144,27 @@ option{
     right: 0;
 }
 
-#left_banner:hover, #right_banner:hover{
+/* #left_banner:hover, #right_banner:hover{
     transform: scale(1.1);
-}
+} */
 
 .error{
-    font-family: "Montserrat", sans-serif;
-}
-
-.btn-close{
-    font-size: x-small;
+    font-family: Helvetica, sans-serif;
 }
 
 .alert{
     width: 50%;
-    color: red;
     font-size: calc(1vw + 1vh);
     font-weight: bold;
     text-align: center;
-    margin-top: 10vh;
+    margin-top: 5vh;
     margin-left: auto;
     margin-right: auto;
-    background-color: rgb(255, 242, 145);
-    color: black;
+    background-color: #703C47;
+    color: white;
     border-radius: 0.3rem;
     padding: 0.75rem;
-    padding-right: 1.8rem;
     display: block;
-    border: 1px solid black;
 }
 
 .mycontainer {
@@ -202,16 +195,46 @@ option{
     .mycontainer {
         margin: 2% 5%;
     }
-}
-
-@media (max-width: 845px) {
-    .side_banner {
-      max-width: 50%; 
+    .alert{
+        width: 80%;
     }
 }
 
 @media (max-width: 670px) {
-    .side_banner {
-      max-width: 30%; 
+    .alert{
+        width: 100%;
     }
+}
+
+.side_banner{
+    max-width: clamp(30%, 50%);
+}
+
+.btn{
+    font-weight: bold;
+    border-radius: calc(1vw + 1vh);
+    padding: 5px 15px;
+    color: white;
+    background-color: rgb(170, 74, 226);
+    border: none;
+    text-align: center;
+    font-size: calc(1vw + 1vh);
+    transition: background-color 0.5s ease, color;
+    width: 10rem;
+}
+
+.btn:hover{
+    background-color: rgb(149, 57, 203);
+    color: white;
+}
+
+.btn:focus{
+    background-color: rgb(149, 57, 203);
+    color: white;
+}
+
+#last{
+    display: flex;
+    justify-content: center;
+    margin: 6% 0;
 }
