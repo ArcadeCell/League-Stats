@@ -3,7 +3,6 @@ import requests
 import os
 
 api_key = os.environ.get("API_KEY")
-# api_key = "RGAPI-be86fa22-ace9-4dd9-bd10-2d6c0ccc0c73"
 
 # function to get summoner_data
 def get_summoner_data(api_key, summoner_name):
@@ -32,7 +31,7 @@ def get_summoner_rank(summoner_id):
         if object["queueType"] == "RANKED_SOLO_5x5":
             summoner_rank["league"] = object["tier"]
             summoner_rank["rank"] = object["tier"] + " " + object["rank"]
-            summoner_rank["lp"] = object["leaguePoints"]
+            summoner_rank["lp"] = object["leaguePoints"]    
             summoner_rank["wins"] = object["wins"]
             summoner_rank["losses"] = object["losses"]
             summoner_rank["winrate"] = str(round(object["wins"] / (object["wins"] + object["losses"]) * 100)) + "%"
