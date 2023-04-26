@@ -5,6 +5,9 @@
     <link rel="icon" type="image/png" href="https://th.bing.com/th/id/R.aa4ae534dffd7e6d526dbfe6713e109a?rik=peY7ffoMN3VZeg&pid=ImgRaw&r=0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@800&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -43,11 +46,34 @@
             </div>
         {% endif %}
 
+        {% if summoner_name %}
+            <div class="summoner-info">
+                <img id="summoner-icon" src="{{ summoner_icon_url }}" alt="Summoner Icon">
+                <div class="container my-container">
+                    <h1 id="summoner-name">{{ summoner_name }}</h1>
+                    <div class="display-rank">
+                        <div class="ranked-stats">
+                                <h2 id="summoner-rank">{{ summoner_rank["rank"] }}</h2>
+                            {% if summoner_rank["rank"] != "UNRANKED" %}
+                                <p class="stats WL" id="wins">W: {{ summoner_rank["wins"] }}</p>
+                                <p class="stats WL" id="losses">L: {{ summoner_rank["losses"] }}</p>
+                                <p class="stats wr" id="wr">WR: {{ summoner_rank["winrate"] }}</p>
+                                <p class="stats lp" id="lp">LP: {{ summoner_rank["lp"] }}</p>
+                            {% endif %}
+                        </div>
+                        {% if summoner_rank["rank"] != "UNRANKED" %}
+                            <img id="summoner-rank-icon" src="../static/rank-icons/emblem-{{ summoner_rank['league'] }}.png">
+                        {% endif %}
+                    </div>
+                </div>
+            </div> 
+        {% endif %}
+
 
         {% if table %}
             {{ table | safe }}
             <div id="last" class="container">
-                <a href="#top" class="btn btn-info btn-lg" role="button">Back to top</a>
+                <a href="#top" class="my-btn" role="button">Back to top</a>
             </div>
         {% endif %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>

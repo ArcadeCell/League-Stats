@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
-from data import champion_dict, api_key, get_champion_mastery_data, organize_champion_data
+from data import champion_dict, api_key, get_champion_mastery_data, organize_champion_data,\
+get_summoner_icon, get_summoner_data, get_summoner_name, get_summoner_id, get_summoner_rank
 from prettytable import PrettyTable
 
 app = Flask(__name__)
@@ -11,21 +12,26 @@ def index():
     if request.method == "POST":
         summoner_name = request.form["summoner_name"]
         
-        data = get_champion_mastery_data(api_key, summoner_name)
-        if data == -1:
+        summoner_data = get_summoner_data(api_key, summoner_name)
+        if summoner_data == -1:
             error_message = "Summoner not found. Please check spelling."
             return render_template("index.html", error_message = error_message)
-
-        data = organize_champion_data(data, champion_dict)
+        
+        summoner_id = get_summoner_id(summoner_data)
+        summoner_rank = get_summoner_rank(summoner_id)
+        summoner_name = get_summoner_name(summoner_data)
+        summoner_icon_url = get_summoner_icon(summoner_data)
+        mastery_data = get_champion_mastery_data(api_key, summoner_data)
+        organized_mastery_data = organize_champion_data(mastery_data, champion_dict)
 
         # print table
         table = PrettyTable()
-        table.add_column("Champion", data["champion_names"])
-        table.add_column("Mastery Level", data["champion_levels"])
-        table.add_column("Mastery Points", data["champion_points"])
-        table.add_column("Last Played(Days)", data["last_played"])
-        table.add_column("Mastery Points Until Next Level", data["points_until_next_level"])
-        table.add_column("Chest Granted", data["chests_granted"])
+        table.add_column("Champion", organized_mastery_data["champion_names"])
+        table.add_column("Mastery Level", organized_mastery_data["champion_levels"])
+        table.add_column("Mastery Points", organized_mastery_data["champion_points"])
+        table.add_column("Last Played(Days)", organized_mastery_data["last_played"])
+        table.add_column("Mastery Points Until Next Level", organized_mastery_data["points_until_next_level"])
+        table.add_column("Chest Granted", organized_mastery_data["chests_granted"])
 
         user_selected_sort = request.form["sort_by"].title()
         
@@ -38,7 +44,7 @@ def index():
         table.sortby = user_selected_sort
         table_html = table.get_html_string()
         
-        return render_template("index.html", table=table_html)
+        return render_template("index.html", table=table_html, summoner_icon_url=summoner_icon_url, summoner_name=summoner_name, summoner_rank=summoner_rank)
     else:
         return render_template("index.html")
 

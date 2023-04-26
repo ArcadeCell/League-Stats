@@ -1,24 +1,61 @@
-import requests
 import datetime
+import requests
+import os
 
-api_key = "RGAPI-d6fff7f5-69db-435a-87e4-dc72d4709964"
+api_key = os.environ.get("API_KEY")
 
-# function to get summoner mastery data
-def get_champion_mastery_data(api_key, summoner_name):
+# function to get summoner_data
+def get_summoner_data(api_key, summoner_name):
     # get Encrypted summoner ID from summoner username
     url = f"https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summoner_name}?api_key={api_key}"
     response = requests.get(url)
     if response.status_code == 404:
         return -1
-    name_data = response.json()
-    summoner_id = name_data["id"]
+    summoner_data = response.json()
+    return summoner_data
 
+def get_summoner_id(data):
+    summoner_id = data["id"]
+    return summoner_id
+
+def get_summoner_name(data):
+    summoner_name = data["name"]
+    return summoner_name
+
+def get_summoner_rank(summoner_id):
+    url = f"https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/{summoner_id}?api_key={api_key}"
+    response = requests.get(url)
+    data = response.json()
+    summoner_rank = {}
+    for object in data:
+        if object["queueType"] == "RANKED_SOLO_5x5":
+            summoner_rank["league"] = object["tier"]
+            summoner_rank["rank"] = object["tier"] + " " + object["rank"]
+            summoner_rank["lp"] = object["leaguePoints"]
+            summoner_rank["wins"] = object["wins"]
+            summoner_rank["losses"] = object["losses"]
+            summoner_rank["winrate"] = str(round(object["wins"] / (object["wins"] + object["losses"]) * 100)) + "%"
+            return summoner_rank
+    summoner_rank["rank"] = "UNRANKED"
+    return summoner_rank
+
+# function to get summoner mastery data
+def get_champion_mastery_data(api_key, data):
+    summoner_id = data["id"]
     # use Encrypted summoner ID to request, store, and return summoner data
     url = f"https://na1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/{summoner_id}?api_key={api_key}"
     response = requests.get(url)
     data = response.json()
     return data
-    
+
+
+# function to get summoner icon
+def get_summoner_icon(data):
+    iconId = data["profileIconId"]
+    url = f"http://ddragon.leagueoflegends.com/cdn/{current_patch}/img/profileicon/{iconId}.png"
+    return url
+
+
 # function to organize summoner mastery data
 def organize_champion_data(data, champion_dict):
     champion_ids = []
@@ -59,7 +96,6 @@ def organize_champion_data(data, champion_dict):
         "points_until_next_level": points_until_next_level,
         "chests_granted": chests_granted,
     }
-
     return champion_data
 
 
@@ -80,5 +116,8 @@ for champion_data in patch_data["data"].values():
     champion_id = champion_data["key"]
     champion_name = champion_data["name"]
     champion_dict[champion_id] = champion_name
+
+
+
 
 

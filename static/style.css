@@ -35,7 +35,6 @@ h1{
     font-weight: bolder;
     text-shadow: 2px 2px 4px black; /* Set the horizontal offset, vertical offset, blur radius, and color of the shadow */
     position: relative;
-    z-index: 1;
 }
 
 body {
@@ -60,12 +59,10 @@ body {
 input[type="text"]{
     font-size: 1.5rem;
     border-radius: 5px;
-    border: 3px solid #000000; 
     transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    font-family: Helvetica, sans-serif;
     text-indent: 10px;
-    color: black;
-    background-color: white;
+    border: 3px solid #000000; 
+    font-family: Helvetica, sans-serif;
     height: 45px;
 }
 
@@ -113,7 +110,7 @@ option{
     background-color: rgb(170, 74, 226);
     border: none;
     border-radius: calc(1vw + 1vh);
-    padding: 5px 15px;
+    padding: 0.375rem 1rem;
     color: white;
     text-align: center;
     font-size: calc(1.2vw + 1.2vh);
@@ -204,31 +201,29 @@ option{
     .alert{
         width: 100%;
     }
+    .side_banner{
+        display: none;
+    }
 }
 
 .side_banner{
     max-width: clamp(30%, 50%);
 }
 
-.btn{
+.my-btn{
     font-weight: bold;
-    border-radius: calc(1vw + 1vh);
-    padding: 5px 15px;
+    border-radius: calc(0.7vw + 0.7vh);   
     color: white;
     background-color: rgb(170, 74, 226);
     border: none;
     text-align: center;
     font-size: calc(1vw + 1vh);
     transition: background-color 0.5s ease, color;
-    width: 10rem;
+    padding: 0.375rem 1rem;
+    text-decoration: none;
 }
 
-.btn:hover{
-    background-color: rgb(149, 57, 203);
-    color: white;
-}
-
-.btn:focus{
+.my-btn:hover{
     background-color: rgb(149, 57, 203);
     color: white;
 }
@@ -236,5 +231,87 @@ option{
 #last{
     display: flex;
     justify-content: center;
-    margin: 6% 0;
+    margin: calc(1.5vh + 1.5vw) 0;
+}
+
+.summoner-info{
+    display: flex;
+    gap: calc(2.5vh + 2.5vw);
+    margin-bottom: calc(1vh + 1vw);
+}
+
+#summoner-icon{
+    height: calc(7vw + 7vh);
+    width: auto;
+    border-radius: 25%;
+    border: 3px solid #000000; 
+}
+
+#summoner-name{
+    text-align: left;
+    margin: 0 0;
+    border-bottom: 1px solid #ddd;
+}
+
+#summoner-rank-icon{
+    display: inline-block;
+    height: calc(6vh + 6vw);
+    width: auto;
+}
+
+#summoner-rank{
+    width: 100%;
+    margin: 0;
+    color: rgb(255, 136, 241);
+    font-size: calc(1.7vw + 1.7vh);
+    font-family: Oswald, sans-serif;
+    font-weight: bolder;
+    text-shadow: 2px 2px 4px black; /* Set the horizontal offset, vertical offset, blur radius, and color of the shadow */
+}
+
+.my-container{
+    margin: 0;
+    padding-left: 0;
+}
+
+.display-rank{
+    display: flex;
+}
+
+.ranked-stats{
+    display: flex;
+    flex-wrap: wrap;
+    width: calc(11vw + 11vh);
+    justify-content: space-between;
+}
+
+.stats{
+    font-size: calc(0.8vh + 0.8vw);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px black;
+    display: inline-block;
+    padding-right: 15%;
+    margin-bottom: 0;
+}
+
+#wins{
+    color: rgb(0, 255, 0);
+}
+
+#losses{
+    color: rgb(255, 0, 0);
+}
+
+#lp{
+    font-size: calc(0.8vh + 0.8vw);
+    text-shadow: 2px 2px 4px black;
+    color: white;
+}
+
+#wr{
+    font-size: calc(0.8vh + 0.8vw);
+    text-shadow: 2px 2px 4px black;
+    color: white;
+    padding-bottom: 10%;
 }
