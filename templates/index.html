@@ -35,9 +35,8 @@
                         <option value="Chest Granted" {% if request.form['sort_by'] == 'Chest Granted' %} selected {% endif %}>Chest Granted</option>
                     </select><br>
                 </div>
-            </div>
-                          
-            <input class="button" type="submit" value="Search">
+            </div>         
+            <input class="button" type="submit" value="Search" id="searchButton">
         </form>
 
         {% if error_message %}
@@ -50,14 +49,16 @@
             <div class="summoner-info">
                 <img id="summoner-icon" src="{{ summoner_icon_url }}" alt="Summoner Icon">
                 <div class="container my-container">
-                    <h1 id="summoner-name">{{ summoner_name }}</h1>
+                    <h1 id="summoner-name">{{ summoner_name }}<div class="spinner-border d-none" id="loader" role="status">
+                        <span class="sr-only"></span></div>
+                    </h1>
                     <div class="display-rank">
                         <div class="ranked-stats">
                                 <h2 id="summoner-rank">{{ summoner_rank["rank"] }}</h2>
                             {% if summoner_rank["rank"] != "UNRANKED" %}
                                 <p class="stats WL" id="wins">W: {{ summoner_rank["wins"] }}</p>
-                                <p class="stats WL" id="losses">L: {{ summoner_rank["losses"] }}</p>
                                 <p class="stats wr" id="wr">WR: {{ summoner_rank["winrate"] }}</p>
+                                <p class="stats WL" id="losses">L: {{ summoner_rank["losses"] }}</p>
                                 <p class="stats lp" id="lp">LP: {{ summoner_rank["lp"] }}</p>
                             {% endif %}
                         </div>
@@ -76,6 +77,6 @@
                 <a href="#top" class="my-btn" role="button">Back to top</a>
             </div>
         {% endif %}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script src="../static/script.js"></script>
 </body>
 </html>

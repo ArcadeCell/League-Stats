@@ -282,7 +282,7 @@ option{
     display: flex;
     flex-wrap: wrap;
     width: calc(11vw + 11vh);
-    justify-content: space-between;
+    margin-right: calc(3vw + 3vh);
 }
 
 .stats{
@@ -291,7 +291,6 @@ option{
     font-weight: 700;
     text-shadow: 2px 2px 4px black;
     display: inline-block;
-    padding-right: 15%;
     margin-bottom: 0;
 }
 
@@ -301,6 +300,7 @@ option{
 
 #losses{
     color: rgb(255, 0, 0);
+    padding-bottom: 10%;
 }
 
 #lp{
@@ -313,5 +313,16 @@ option{
     font-size: calc(0.8vh + 0.8vw);
     text-shadow: 2px 2px 4px black;
     color: white;
-    padding-bottom: 10%;
+}
+
+.WL{
+    width: 50%;
+    padding-right: 10%;
+}
+
+.spinner-border{
+    height: 1.7rem;
+    width: 1.7rem;
+    margin-left: 2%;
+    font-size: small;
 }

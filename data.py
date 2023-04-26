@@ -29,8 +29,13 @@ def get_summoner_rank(summoner_id):
     summoner_rank = {}
     for object in data:
         if object["queueType"] == "RANKED_SOLO_5x5":
+            # get league of summoner in lowercase for image url
             summoner_rank["league"] = object["tier"].lower()
-            summoner_rank["rank"] = object["tier"] + " " + object["rank"]
+            # if summoner is master, grandmaster, or challenger, don't add division
+            if object["tier"] == "MASTER" or object["tier"] == "GRANDMASTER" or object["tier"] == "CHALLENGER":
+                summoner_rank["rank"] = object["tier"]
+            else:
+                summoner_rank["rank"] = object["tier"] + " " + object["rank"]
             summoner_rank["lp"] = object["leaguePoints"]    
             summoner_rank["wins"] = object["wins"]
             summoner_rank["losses"] = object["losses"]
