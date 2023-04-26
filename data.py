@@ -29,7 +29,7 @@ def get_summoner_rank(summoner_id):
     summoner_rank = {}
     for object in data:
         if object["queueType"] == "RANKED_SOLO_5x5":
-            summoner_rank["league"] = object["tier"]
+            summoner_rank["league"] = object["tier"].lower()
             summoner_rank["rank"] = object["tier"] + " " + object["rank"]
             summoner_rank["lp"] = object["leaguePoints"]    
             summoner_rank["wins"] = object["wins"]
