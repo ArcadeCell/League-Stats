@@ -2,8 +2,8 @@ import datetime
 import requests
 import os
 
-# api_key = os.environ.get("API_KEY")
-api_key = "RGAPI-be86fa22-ace9-4dd9-bd10-2d6c0ccc0c73"
+api_key = os.environ.get("API_KEY")
+# api_key = "RGAPI-be86fa22-ace9-4dd9-bd10-2d6c0ccc0c73"
 
 # function to get summoner_data
 def get_summoner_data(api_key, summoner_name):
