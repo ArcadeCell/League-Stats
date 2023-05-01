@@ -2,7 +2,8 @@ import datetime
 import requests
 import os
 
-api_key = os.environ.get("API_KEY")
+api_key = os.getenv("API_KEY")
+
 
 # function to get summoner_data
 def get_summoner_data(api_key, summoner_name):
@@ -14,35 +15,65 @@ def get_summoner_data(api_key, summoner_name):
     summoner_data = response.json()
     return summoner_data
 
+
 def get_summoner_id(data):
     summoner_id = data["id"]
     return summoner_id
+
 
 def get_summoner_name(data):
     summoner_name = data["name"]
     return summoner_name
 
+
 def get_summoner_rank(summoner_id):
     url = f"https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/{summoner_id}?api_key={api_key}"
     response = requests.get(url)
     data = response.json()
-    summoner_rank = {}
+    summoner_rank = {
+        "RANKED_SOLO_5x5": {},
+        "RANKED_FLEX_SR": {}
+    }
+
+    if len(data) == 0:
+        summoner_rank["RANKED_SOLO_5x5"]["rank"] = "UNRANKED"
+        summoner_rank["RANKED_FLEX_SR"]["rank"] = "UNRANKED"
+        return summoner_rank
+    
     for object in data:
         if object["queueType"] == "RANKED_SOLO_5x5":
             # get league of summoner in lowercase for image url
-            summoner_rank["league"] = object["tier"].lower()
+            summoner_rank["RANKED_SOLO_5x5"]["league"] = object["tier"].lower()
             # if summoner is master, grandmaster, or challenger, don't add division
             if object["tier"] == "MASTER" or object["tier"] == "GRANDMASTER" or object["tier"] == "CHALLENGER":
-                summoner_rank["rank"] = object["tier"]
+                summoner_rank["RANKED_SOLO_5x5"]["rank"] = object["tier"]
             else:
-                summoner_rank["rank"] = object["tier"] + " " + object["rank"]
-            summoner_rank["lp"] = object["leaguePoints"]    
-            summoner_rank["wins"] = object["wins"]
-            summoner_rank["losses"] = object["losses"]
-            summoner_rank["winrate"] = str(round(object["wins"] / (object["wins"] + object["losses"]) * 100)) + "%"
-            return summoner_rank
-    summoner_rank["rank"] = "UNRANKED"
+                summoner_rank["RANKED_SOLO_5x5"]["rank"] = object["tier"] + " " + object["rank"]
+            summoner_rank["RANKED_SOLO_5x5"]["lp"] = object["leaguePoints"]    
+            summoner_rank["RANKED_SOLO_5x5"]["wins"] = object["wins"]
+            summoner_rank["RANKED_SOLO_5x5"]["losses"] = object["losses"]
+            summoner_rank["RANKED_SOLO_5x5"]["winrate"] = str(round(object["wins"] / (object["wins"] + object["losses"]) * 100, 1)) + "%"
+
+        if object["queueType"] == "RANKED_FLEX_SR":
+            # get league of summoner in lowercase for image url
+            summoner_rank["RANKED_FLEX_SR"]["league"] = object["tier"].lower()
+            # if summoner is master, grandmaster, or challenger, don't add division
+            if object["tier"] == "MASTER" or object["tier"] == "GRANDMASTER" or object["tier"] == "CHALLENGER":
+                summoner_rank["RANKED_FLEX_SR"]["rank"] = object["tier"]
+            else:
+                summoner_rank["RANKED_FLEX_SR"]["rank"] = object["tier"] + " " + object["rank"]
+            summoner_rank["RANKED_FLEX_SR"]["lp"] = object["leaguePoints"]    
+            summoner_rank["RANKED_FLEX_SR"]["wins"] = object["wins"]
+            summoner_rank["RANKED_FLEX_SR"]["losses"] = object["losses"]
+            summoner_rank["RANKED_FLEX_SR"]["winrate"] = str(round(object["wins"] / (object["wins"] + object["losses"]) * 100, 1)) + "%"
+        
+        if len(summoner_rank["RANKED_SOLO_5x5"]) == 0:
+            summoner_rank["RANKED_SOLO_5x5"]["rank"] = "UNRANKED"
+        if len(summoner_rank["RANKED_FLEX_SR"]) == 0:
+            summoner_rank["RANKED_FLEX_SR"]["rank"] = "UNRANKED"
+            
     return summoner_rank
+
 
 # function to get summoner mastery data
 def get_champion_mastery_data(api_key, data):

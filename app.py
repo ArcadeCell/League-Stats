@@ -7,14 +7,11 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    error_message = None
-
+    error_message = "Summoner not found. Please check spelling."
     if request.method == "POST":
         summoner_name = request.form["summoner_name"]
-        
         summoner_data = get_summoner_data(api_key, summoner_name)
         if summoner_data == -1:
-            error_message = "Summoner not found. Please check spelling."
             return render_template("index.html", error_message = error_message)
         
         summoner_id = get_summoner_id(summoner_data)

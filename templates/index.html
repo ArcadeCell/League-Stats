@@ -53,18 +53,33 @@
                         <span class="sr-only"></span></div>
                     </h1>
                     <div class="display-rank">
-                        <div class="ranked-stats">
-                                <h2 id="summoner-rank">{{ summoner_rank["rank"] }}</h2>
-                            {% if summoner_rank["rank"] != "UNRANKED" %}
-                                <p class="stats WL" id="wins">W: {{ summoner_rank["wins"] }}</p>
-                                <p class="stats wr" id="wr">WR: {{ summoner_rank["winrate"] }}</p>
-                                <p class="stats WL" id="losses">L: {{ summoner_rank["losses"] }}</p>
-                                <p class="stats lp" id="lp">LP: {{ summoner_rank["lp"] }}</p>
+                        <div class="ranked-stats" id="solo-rank">
+                            <h2 class="queue_type">RANKED SOLO/DUO</h2>
+                            <h2 id="summoner-solo-rank">{{ summoner_rank["RANKED_SOLO_5x5"]["rank"] }}</h2>
+                            {% if summoner_rank["RANKED_SOLO_5x5"]["rank"] != "UNRANKED" %}
+                                <p class="stats WL" id="wins">W: {{ summoner_rank["RANKED_SOLO_5x5"]["wins"] }}</p>
+                                <p class="stats wr" id="wr">WR: {{ summoner_rank["RANKED_SOLO_5x5"]["winrate"] }}</p>
+                                <p class="stats WL" id="losses">L: {{ summoner_rank["RANKED_SOLO_5x5"]["losses"] }}</p>
+                                <p class="stats lp" id="lp">LP: {{ summoner_rank["RANKED_SOLO_5x5"]["lp"] }}</p>
+                            {% endif %}
+                            {% if summoner_rank["RANKED_SOLO_5x5"]["rank"] != "UNRANKED" %}
+                                <img class="ranked-icon" id="summoner-solo-rank-icon" src="../static/rank-icons/emblem-{{ summoner_rank['RANKED_SOLO_5x5']['league'] }}.png">
                             {% endif %}
                         </div>
-                        {% if summoner_rank["rank"] != "UNRANKED" %}
-                            <img id="summoner-rank-icon" src="../static/rank-icons/emblem-{{ summoner_rank['league'] }}.png">
-                        {% endif %}
+
+                        <div class="ranked-stats" id="flex-rank">
+                            <h2 class="queue_type">RANKED FLEX</h2>
+                            <h2 id="summoner-solo-rank">{{ summoner_rank["RANKED_FLEX_SR"]["rank"] }}</h2>
+                            {% if summoner_rank["RANKED_FLEX_SR"]["rank"] != "UNRANKED" %}
+                                <p class="stats WL" id="wins">W: {{ summoner_rank["RANKED_FLEX_SR"]["wins"] }}</p>
+                                <p class="stats wr" id="wr">WR: {{ summoner_rank["RANKED_FLEX_SR"]["winrate"] }}</p>
+                                <p class="stats WL" id="losses">L: {{ summoner_rank["RANKED_FLEX_SR"]["losses"] }}</p>
+                                <p class="stats lp" id="lp">LP: {{ summoner_rank["RANKED_FLEX_SR"]["lp"] }}</p>
+                            {% endif %}
+                            {% if summoner_rank["RANKED_FLEX_SR"]["rank"] != "UNRANKED" %}
+                                <img class="ranked-icon" id="summoner-flex-rank-icon" src="../static/rank-icons/emblem-{{ summoner_rank['RANKED_FLEX_SR']['league'] }}.png">
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div> 
