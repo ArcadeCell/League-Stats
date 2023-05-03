@@ -17,26 +17,49 @@
 
         <form method="POST">
             <div class="big_container">
-                <div id="summoner_block" class="mycontainer">
+                <div id="summoner_block" class="mycontainer">        
                     <label for="summoner_name">Summoner Name</label>
-                    <input type="text" id="summoner_name" name="summoner_name" placeholder="Search Summoner" 
-                    required value="{{ request.form['summoner_name']|default('') }}" 
-                    oninvalid="this.setCustomValidity('Please enter a Summoner name.')"
-                    oninput="this.setCustomValidity('')">
+                    <div class="region-summoner">
+                        <div class="dropdown region-selector">
+                            <label for="region-select" class="visually-hidden">Region</label>
+                            <select id="region-select" class="form-select" name="region-select">
+                                <option class="region" value="NA" {% if request.form["region-select"] == "NA" %} selected {% endif %}>NA</option>
+                                <option class="region" value="EUW" {% if request.form["region-select"] == "EUW" %} selected {% endif %}>EUW</option>
+                                <option class="region" value="EUN" {% if request.form["region-select"] == "EUN" %} selected {% endif %}>EUN</option>
+                                <option class="region" value="KR" {% if request.form["region-select"] == "KR" %} selected {% endif %}>KR</option>
+                                <option class="region" value="JP" {% if request.form["region-select"] == "JP" %} selected {% endif %}>JP</option>
+                                <option class="region" value="BR" {% if request.form["region-select"] == "BR" %} selected {% endif %}>BR</option>
+                                <option class="region" value="OCE" {% if request.form["region-select"] == "OCE" %} selected {% endif %}>OCE</option>
+                                <option class="region" value="LAN" {% if request.form["region-select"] == "LAN" %} selected {% endif %}>LAN</option>
+                                <option class="region" value="LAS" {% if request.form["region-select"] == "LAS" %} selected {% endif %}>LAS</option>
+                                <option class="region" value="RU" {% if request.form["region-select"] == "RU" %} selected {% endif %}>RU</option>
+                                <option class="region" value="TR" {% if request.form["region-select"] == "TR" %} selected {% endif %}>TR</option>
+                                <option class="region" value="PH" {% if request.form["region-select"] == "PH" %} selected {% endif %}>PH</option>
+                                <option class="region" value="SG" {% if request.form["region-select"] == "SG" %} selected {% endif %}>SG</option>
+                                <option class="region" value="TH" {% if request.form["region-select"] == "TH" %} selected {% endif %}>TH</option>
+                                <option class="region" value="TW" {% if request.form["region-select"] == "TW" %} selected {% endif %}>TW</option>
+                                <option class="region" value="VN" {% if request.form["region-select"] == "VN" %} selected {% endif %}>VN</option>
+                            </select>
+                        </div>      
+                        <input type="text" id="summoner_name" name="summoner_name" placeholder="Search Summoner" 
+                        required value="{{ request.form['summoner_name']|default('') }}" 
+                        oninvalid="this.setCustomValidity('Please enter a Summoner name.')"
+                        oninput="this.setCustomValidity('')">
+                    </div>
                 </div>
                 <div id="sort_block" class="mycontainer">
-                    <label for="sort_by">Sort by</label>
-                    <select name="sort_by">
-                        <option value="Champion" {% if request.form['sort_by'] == 'Champion' %} selected {% endif %}>Champion</option>
-                        <option value="Mastery Level" {% if request.form['sort_by'] == 'Mastery Level' %} selected {% endif %}>Mastery Level</option>
-                        <option value="Mastery Points" {% if request.form['sort_by'] == 'Mastery Points' %} selected {% endif %}>Mastery Points</option>
-                        <option value="Last Played" {% if request.form['sort_by'] == 'Last Played' %} selected {% endif %}>Last Played</option>
-                        <option value="Mastery Points Until Next Level" {% if request.form['sort_by'] == 'Mastery Points Until Next Level' %} selected {% endif %}>Mastery Points Until Next Level</option>
-                        <option value="Chest Granted" {% if request.form['sort_by'] == 'Chest Granted' %} selected {% endif %}>Chest Granted</option>
+                    <label for="sort-by">Sort by</label>
+                    <select name="sort-by" id="sort-by">
+                        <option value="Champion" {% if request.form['sort-by'] == 'Champion' %} selected {% endif %}>Champion</option>
+                        <option value="Mastery Level" {% if request.form['sort-by'] == 'Mastery Level' %} selected {% endif %}>Mastery Level</option>
+                        <option value="Mastery Points" {% if request.form['sort-by'] == 'Mastery Points' %} selected {% endif %}>Mastery Points</option>
+                        <option value="Last Played" {% if request.form['sort-by'] == 'Last Played' %} selected {% endif %}>Last Played</option>
+                        <option value="Mastery Points Until Next Level" {% if request.form['sort-by'] == 'Mastery Points Until Next Level' %} selected {% endif %}>Mastery Points Until Next Level</option>
+                        <option value="Chest Granted" {% if request.form['sort-by'] == 'Chest Granted' %} selected {% endif %}>Chest Granted</option>
                     </select><br>
                 </div>
-            </div>         
-            <input class="button" type="submit" value="Search" id="searchButton">
+            </div>
+        <input class="button" type="submit" value="Search" id="searchButton">
         </form>
 
         {% if error_message %}
@@ -55,6 +78,9 @@
                     <div class="display-rank">
                         <div class="ranked-stats" id="solo-rank">
                             <h2 class="queue_type">RANKED SOLO/DUO</h2>
+                            {% if summoner_rank["RANKED_SOLO_5x5"]["hotStreak"] == true %}
+                                <img class="streak-icon" src="../static/streak-icon.png" alt="">
+                            {% endif %}
                             <h2 id="summoner-solo-rank">{{ summoner_rank["RANKED_SOLO_5x5"]["rank"] }}</h2>
                             {% if summoner_rank["RANKED_SOLO_5x5"]["rank"] != "UNRANKED" %}
                                 <p class="stats WL" id="wins">W: {{ summoner_rank["RANKED_SOLO_5x5"]["wins"] }}</p>
@@ -69,6 +95,9 @@
 
                         <div class="ranked-stats" id="flex-rank">
                             <h2 class="queue_type">RANKED FLEX</h2>
+                            {% if summoner_rank["RANKED_FLEX_SR"]["hotStreak"] == true %}
+                                <img class="streak-icon" src="../static/streak-icon.png" alt="">
+                            {% endif %}
                             <h2 id="summoner-solo-rank">{{ summoner_rank["RANKED_FLEX_SR"]["rank"] }}</h2>
                             {% if summoner_rank["RANKED_FLEX_SR"]["rank"] != "UNRANKED" %}
                                 <p class="stats WL" id="wins">W: {{ summoner_rank["RANKED_FLEX_SR"]["wins"] }}</p>

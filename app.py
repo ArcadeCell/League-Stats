@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from data import champion_dict, api_key, get_champion_mastery_data, organize_champion_data,\
-get_summoner_icon, get_summoner_data, get_summoner_name, get_summoner_id, get_summoner_rank
+get_summoner_icon, get_summoner_data, get_summoner_name, get_summoner_id, get_summoner_rank, get_region
 from prettytable import PrettyTable
 
 app = Flask(__name__)
@@ -9,16 +9,19 @@ app = Flask(__name__)
 def index():
     error_message = "Summoner not found. Please check spelling."
     if request.method == "POST":
+        region = request.form["region-select"]
+        region = get_region(region)
         summoner_name = request.form["summoner_name"]
-        summoner_data = get_summoner_data(api_key, summoner_name)
+
+        summoner_data = get_summoner_data(api_key, summoner_name, region)
         if summoner_data == -1:
             return render_template("index.html", error_message = error_message)
         
         summoner_id = get_summoner_id(summoner_data)
-        summoner_rank = get_summoner_rank(summoner_id)
+        summoner_rank = get_summoner_rank(summoner_id, region)
         summoner_name = get_summoner_name(summoner_data)
         summoner_icon_url = get_summoner_icon(summoner_data)
-        mastery_data = get_champion_mastery_data(api_key, summoner_data)
+        mastery_data = get_champion_mastery_data(api_key, summoner_data, region)
         organized_mastery_data = organize_champion_data(mastery_data, champion_dict)
 
         # print table
@@ -30,7 +33,7 @@ def index():
         table.add_column("Mastery Points Until Next Level", organized_mastery_data["points_until_next_level"])
         table.add_column("Chest Granted", organized_mastery_data["chests_granted"])
 
-        user_selected_sort = request.form["sort_by"].title()
+        user_selected_sort = request.form["sort-by"].title()
         
         if user_selected_sort == "Last Played":
             user_selected_sort = "Last Played(Days)"

@@ -4,11 +4,10 @@ import os
 
 api_key = os.getenv("API_KEY")
 
-
 # function to get summoner_data
-def get_summoner_data(api_key, summoner_name):
+def get_summoner_data(api_key, summoner_name, region):
     # get Encrypted summoner ID from summoner username
-    url = f"https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summoner_name}?api_key={api_key}"
+    url = f"https://{region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summoner_name}?api_key={api_key}"
     response = requests.get(url)
     if response.status_code == 404:
         return -1
@@ -26,8 +25,8 @@ def get_summoner_name(data):
     return summoner_name
 
 
-def get_summoner_rank(summoner_id):
-    url = f"https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/{summoner_id}?api_key={api_key}"
+def get_summoner_rank(summoner_id, region):
+    url = f"https://{region}.api.riotgames.com/lol/league/v4/entries/by-summoner/{summoner_id}?api_key={api_key}"
     response = requests.get(url)
     data = response.json()
     summoner_rank = {
@@ -53,6 +52,7 @@ def get_summoner_rank(summoner_id):
             summoner_rank["RANKED_SOLO_5x5"]["wins"] = object["wins"]
             summoner_rank["RANKED_SOLO_5x5"]["losses"] = object["losses"]
             summoner_rank["RANKED_SOLO_5x5"]["winrate"] = str(round(object["wins"] / (object["wins"] + object["losses"]) * 100, 1)) + "%"
+            summoner_rank["RANKED_SOLO_5x5"]["hotStreak"] = object["hotStreak"]
 
         if object["queueType"] == "RANKED_FLEX_SR":
             # get league of summoner in lowercase for image url
@@ -66,7 +66,8 @@ def get_summoner_rank(summoner_id):
             summoner_rank["RANKED_FLEX_SR"]["wins"] = object["wins"]
             summoner_rank["RANKED_FLEX_SR"]["losses"] = object["losses"]
             summoner_rank["RANKED_FLEX_SR"]["winrate"] = str(round(object["wins"] / (object["wins"] + object["losses"]) * 100, 1)) + "%"
-        
+            summoner_rank["RANKED_FLEX_SR"]["hotStreak"] = object["hotStreak"]
+
         if len(summoner_rank["RANKED_SOLO_5x5"]) == 0:
             summoner_rank["RANKED_SOLO_5x5"]["rank"] = "UNRANKED"
         if len(summoner_rank["RANKED_FLEX_SR"]) == 0:
@@ -76,10 +77,10 @@ def get_summoner_rank(summoner_id):
 
 
 # function to get summoner mastery data
-def get_champion_mastery_data(api_key, data):
+def get_champion_mastery_data(api_key, data, region):
     summoner_id = data["id"]
     # use Encrypted summoner ID to request, store, and return summoner data
-    url = f"https://na1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/{summoner_id}?api_key={api_key}"
+    url = f"https://{region}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/{summoner_id}?api_key={api_key}"
     response = requests.get(url)
     data = response.json()
     return data
@@ -134,6 +135,42 @@ def organize_champion_data(data, champion_dict):
     }
     return champion_data
 
+
+def get_region(region):
+    if region == "NA":
+        return "na1"
+    elif region == "EUW":
+        return "euw1"
+    elif region == "EUN":
+        return "eun1"
+    elif region == "KR":
+        return "kr"
+    elif region == "JP":
+        return "jp1"
+    elif region == "BR":
+        return "br1"
+    elif region == "OCE":
+        return "oc1"
+    elif region == "LAN":
+        return "la1"
+    elif region == "LAS":
+        return "la2"
+    elif region == "RU":
+        return "ru"
+    elif region == "TR":
+        return "tr1"
+    elif region == "PH":
+        return "ph2"
+    elif region == "SG":
+        return "sg"
+    elif region == "TH":
+        return "th"
+    elif region == "TW":
+        return "tw2"
+    elif region == "VN":
+        return "vn2"
+    else: 
+        return -1
 
 # set up the API request URL for getting champion names. first get current patch number
 url = "https://ddragon.leagueoflegends.com/api/versions.json"

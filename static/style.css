@@ -11,19 +11,31 @@ table {
     color: white;
 }
 
-td, th {
-    padding: calc(0.3vh + 0.3vw) 0;
+div.align-content{
+    display: flex;
+    justify-content: left;
+}
+
+tr, th {
     text-align: center;
-    background-color: #3c79ae;
+    background-color: #4687c0;
     font-size: 20px;
+}
+
+td{
+    padding: calc(0.3vh + 0.3vw) 0;
 }
 
 th {
     padding-top: calc(0.4vh + 0.4vw);
     padding-bottom: calc(0.4vh + 0.4vw);
-    border-bottom: 3px solid #ddd;
-    font-weight: bold;
-    text-shadow: 2px 2px 4px black; /* Set the horizontal offset, vertical offset, blur radius, and color of the shadow */
+    border-bottom: 1px solid #ddd;
+    font-weight: 700;
+    color: rgb(255, 236, 94);
+}
+
+tr:nth-of-type(2n-1){
+    background-color: #3c7eb8;
 }
 
 h1{
@@ -48,44 +60,26 @@ body {
     background-repeat: repeat;
 }
 
-#summoner_name{
-    font-size: 15px;
-    width: 300px;
+input#summoner_name{
+    font-size: 16px;
+    width: 200px;
     padding: 10px;
     font-family: Helvetica, sans-serif;
-    border-radius: 3px;
-}
-
-input[type="text"]{
-    font-size: 1.5rem;
     border-radius: 5px;
-    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    text-indent: 10px;
-    border: 3px solid #000000; 
-    font-family: Helvetica, sans-serif;
-    height: 45px;
-}
-
-input[type="text"]:hover, select:hover{
-    border-color: #15abec; 
-    box-shadow: 0 0 5px #15abec; 
-}
-
-input[type="text"]:focus, select:focus{
+    margin: 0;
+    padding-left: 0;
     outline: none;
-    border-color: #15abec; 
-    box-shadow: 0 0 5px #15abec; 
+    height: 45px;
+    border: none;
 }
   
-select{
-    font-size: 15px;
+select#sort-by{
     width: 300px;
-    padding: 10px 0px;
-    border: 3px solid #000000; 
-    border-radius: 3px;
-    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    padding: 10px 3%;
+    border-radius: 8px;
     font-family: Helvetica, sans-serif;
     height: 45px;
+    outline: none;
 }
 
 form {
@@ -96,33 +90,28 @@ form {
 }
 
 label{
-    font-size: calc(1.2vw + 1.2vh);
+    font-size: calc(0.5vw + 2vh);
     font-family: Helvetica, sans-serif;
     color: white;
     display: block;
 }
 
-option{
-    text-align: center;
-}
-
 .button{
-    background-color: rgb(170, 74, 226);
+    background-color: rgb(50, 161, 246);
     border: none;
-    border-radius: calc(1vw + 1vh);
-    padding: 0.375rem 1rem;
+    border-radius: 25px;
+    padding: 0.375rem 2rem;
     color: white;
     text-align: center;
-    font-size: calc(1.2vw + 1.2vh);
-    margin-bottom: 3rem;
+    font-size: 20px;
+    margin: 1rem 0 3rem;
     transition: background-color 0.5s ease;
     border: 3px solid #000000; 
-    width: 10rem;
     font-weight: bold;
 }
 
 .button:hover{
-    background-color: rgb(149, 57, 203);
+    background-color: rgb(39, 139, 216);
 }
 
 .side_banner{
@@ -170,9 +159,9 @@ option{
 
 .big_container {
     display: flex;
-    width: 55vw;
-    justify-content: space-around;
-    margin-bottom: 2rem;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 1rem;
 }
 
 @media (max-width: 1450px) {
@@ -212,19 +201,19 @@ option{
 
 .my-btn{
     font-weight: bold;
-    border-radius: calc(0.7vw + 0.7vh);   
+    border-radius: 25px;  
     color: white;
-    background-color: rgb(170, 74, 226);
+    background-color: rgb(50, 161, 246);
     border: none;
     text-align: center;
-    font-size: calc(1vw + 1vh);
+    font-size: 18px;
     transition: background-color 0.5s ease, color;
     padding: 0.375rem 1rem;
     text-decoration: none;
 }
 
 .my-btn:hover{
-    background-color: rgb(149, 57, 203);
+    background-color: rgb(39, 139, 216);
     color: white;
 }
 
@@ -339,4 +328,36 @@ option{
     font-family: Oswald, sans-serif;
     font-weight: bolder;
     text-shadow: 2px 2px 4px black; /* Set the horizontal offset, vertical offset, blur radius, and color of the shadow */
+}
+
+.streak-icon{
+    width: 10%;
+    height: auto;
+    margin-left: 2%;
+    margin-top: 0.5%;
+}
+
+.dropdown-menu{
+    font-size: calc(0.7vw + 1vh);
+}
+
+select#region-select.form-select{
+    padding: 0.35rem 2rem 0.35rem 0.5rem;
+    outline: none;
+    box-shadow: none;
+    margin-left: 0;
+    font-size: 16px;
+    border: none;
+    background-color: white;
+}
+
+.region-selector{
+    display: inline-block;
+    margin-left: 3%;
+}
+
+.region-summoner{
+    background-color: white;
+    border-radius: 8px;
+    width: 300px;
 }
