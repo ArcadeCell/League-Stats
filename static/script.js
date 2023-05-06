@@ -8,12 +8,10 @@ document.head.appendChild(bootstrapScript);
 const searchButton = document.getElementById("searchButton");
 const loader = document.getElementById("loader");
 
-searchButton.addEventListener('click', () =>{
+searchButton.addEventListener('click', () => {
     loader.classList.remove("d-none");
     setTimeout(() =>{
         loader.classList.add("d-none");
     }, 12000);
 });
-
-
 

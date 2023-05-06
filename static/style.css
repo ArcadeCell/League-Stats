@@ -7,8 +7,8 @@ table {
     font-family: Verdana, sans-serif;
     border-collapse: collapse;
     width: 100%;
-    padding: 10px;
     color: white;
+    border: 25px solid #4687c0;
 }
 
 div.align-content{
@@ -23,13 +23,11 @@ tr, th {
 }
 
 td{
-    padding: calc(0.3vh + 0.3vw) 0;
+    padding: 1vh 0;
 }
 
 th {
-    padding-top: calc(0.4vh + 0.4vw);
-    padding-bottom: calc(0.4vh + 0.4vw);
-    border-bottom: 1px solid #ddd;
+    padding-bottom: calc(1vh + 0.4vw);
     font-weight: 700;
     color: rgb(255, 236, 94);
 }
@@ -62,11 +60,7 @@ body {
 
 input#summoner_name{
     font-size: 16px;
-    width: 200px;
-    padding: 10px;
     font-family: Helvetica, sans-serif;
-    border-radius: 5px;
-    margin: 0;
     padding-left: 0;
     outline: none;
     height: 45px;
@@ -75,6 +69,7 @@ input#summoner_name{
   
 select#sort-by{
     width: 300px;
+    font-size: 16px;
     padding: 10px 3%;
     border-radius: 8px;
     font-family: Helvetica, sans-serif;
@@ -99,19 +94,21 @@ label{
 .button{
     background-color: rgb(50, 161, 246);
     border: none;
-    border-radius: 25px;
-    padding: 0.375rem 2rem;
+    border-radius: 10px;
+    padding: 0.5rem 1.8rem;
     color: white;
     text-align: center;
-    font-size: 20px;
-    margin: 1rem 0 3rem;
+    font-size: 18px;
+    margin: 1rem 0 1.5rem;
     transition: background-color 0.5s ease;
     border: 3px solid #000000; 
     font-weight: bold;
+    text-decoration: none;
 }
 
 .button:hover{
     background-color: rgb(39, 139, 216);
+    color: white;
 }
 
 .side_banner{
@@ -153,7 +150,7 @@ label{
     display: block;
 }
 
-.mycontainer {
+.search-container {
     margin: 0 5%;
 }
 
@@ -178,7 +175,7 @@ label{
         flex-direction: column;
         align-items: center;
     }
-    .mycontainer {
+    .search-container {
         margin: 2% 5%;
     }
     .alert{
@@ -201,7 +198,7 @@ label{
 
 .my-btn{
     font-weight: bold;
-    border-radius: 25px;  
+    border-radius: 10px;  
     color: white;
     background-color: rgb(50, 161, 246);
     border: none;
@@ -210,11 +207,6 @@ label{
     transition: background-color 0.5s ease, color;
     padding: 0.375rem 1rem;
     text-decoration: none;
-}
-
-.my-btn:hover{
-    background-color: rgb(39, 139, 216);
-    color: white;
 }
 
 #last{
@@ -256,6 +248,7 @@ label{
 .my-container{
     margin: 0;
     padding-left: 0;
+    padding-right: 10%;
 }
 
 .display-rank{

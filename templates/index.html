@@ -17,7 +17,7 @@
 
         <form method="POST">
             <div class="big_container">
-                <div id="summoner_block" class="mycontainer">        
+                <div id="summoner_block" class="search-container">        
                     <label for="summoner_name">Summoner Name</label>
                     <div class="region-summoner">
                         <div class="dropdown region-selector">
@@ -47,7 +47,7 @@
                         oninput="this.setCustomValidity('')">
                     </div>
                 </div>
-                <div id="sort_block" class="mycontainer">
+                <div id="sort_block" class="search-container">
                     <label for="sort-by">Sort by</label>
                     <select name="sort-by" id="sort-by">
                         <option value="Champion" {% if request.form['sort-by'] == 'Champion' %} selected {% endif %}>Champion</option>
@@ -118,7 +118,7 @@
         {% if table %}
             {{ table | safe }}
             <div id="last" class="container">
-                <a href="#top" class="my-btn" role="button">Back to top</a>
+                <a href="#top" class="button" role="button">Back to top</a>
             </div>
         {% endif %}
     <script src="../static/script.js"></script>
