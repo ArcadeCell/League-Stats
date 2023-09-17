@@ -3,6 +3,7 @@ from data import champion_dict, api_key, get_champion_mastery_data, organize_cha
 get_summoner_icon, get_summoner_data, get_summoner_name, get_summoner_id, get_summoner_rank, get_region
 from prettytable import PrettyTable
 
+
 app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
@@ -26,6 +27,7 @@ def index():
 
         # print table
         table = PrettyTable()
+        # table.add_column("Images", organized_mastery_data["champion_images"])
         table.add_column("Champion", organized_mastery_data["champion_names"])
         table.add_column("Mastery Level", organized_mastery_data["champion_levels"])
         table.add_column("Mastery Points", organized_mastery_data["champion_points"])
@@ -44,7 +46,12 @@ def index():
         table.sortby = user_selected_sort
         table_html = table.get_html_string()
         
-        return render_template("index.html", table=table_html, summoner_icon_url=summoner_icon_url, summoner_name=summoner_name, summoner_rank=summoner_rank)
+        return render_template("index.html", 
+                               table=table_html, 
+                               summoner_icon_url=summoner_icon_url, 
+                               summoner_name=summoner_name, 
+                               summoner_rank=summoner_rank,
+                              )
     else:
         return render_template("index.html")
 

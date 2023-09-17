@@ -2,7 +2,7 @@ import datetime
 import requests
 import os
 
-api_key = os.getenv("API_KEY")
+api_key = os.getenv("LEAGUE_API_KEY")
 
 # function to get summoner_data
 def get_summoner_data(api_key, summoner_name, region):
@@ -113,9 +113,12 @@ def organize_champion_data(data, champion_dict):
 
     # convert champion IDs to their corresponding champion names
     champion_names = []
+    champion_images = []
     for champion_id in champion_ids:
         champion_name = champion_dict[str(champion_id)]
         champion_names.append(champion_name)
+        champion_image = f"http://ddragon.leagueoflegends.com/cdn/{current_patch}/img/champion/{champion_name}.png"
+        champion_images.append(champion_image);
 
     # convert last played time from unix time to days
     last_played = []
@@ -132,6 +135,7 @@ def organize_champion_data(data, champion_dict):
         "last_played": last_played,
         "points_until_next_level": points_until_next_level,
         "chests_granted": chests_granted,
+        "champion_images": champion_images,
     }
     return champion_data
 
