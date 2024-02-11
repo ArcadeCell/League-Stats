@@ -19,11 +19,13 @@ def get_summoner_id(data):
     summoner_id = data["id"]
     return summoner_id
 
-
 def get_summoner_name(data):
     summoner_name = data["name"]
     return summoner_name
 
+def get_puuid(data):
+    puuid = data["puuid"]
+    return puuid
 
 def get_summoner_rank(summoner_id, region):
     url = f"https://{region}.api.riotgames.com/lol/league/v4/entries/by-summoner/{summoner_id}?api_key={api_key}"
@@ -77,10 +79,9 @@ def get_summoner_rank(summoner_id, region):
 
 
 # function to get summoner mastery data
-def get_champion_mastery_data(api_key, data, region):
-    summoner_id = data["id"]
+def get_champion_mastery_data(api_key, puuid, region):
     # use Encrypted summoner ID to request, store, and return summoner data
-    url = f"https://{region}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/{summoner_id}?api_key={api_key}"
+    url = f"https://{region}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/{puuid}?api_key={api_key}"
     response = requests.get(url)
     data = response.json()
     return data

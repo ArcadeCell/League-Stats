@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from data import champion_dict, api_key, get_champion_mastery_data, organize_champion_data,\
-get_summoner_icon, get_summoner_data, get_summoner_name, get_summoner_id, get_summoner_rank, get_region
+get_summoner_icon, get_summoner_data, get_summoner_name, get_summoner_id, get_summoner_rank, get_region, get_puuid
 from prettytable import PrettyTable
 
 
@@ -20,9 +20,10 @@ def index():
         
         summoner_id = get_summoner_id(summoner_data)
         summoner_rank = get_summoner_rank(summoner_id, region)
+        puuid = get_puuid(summoner_data)
         summoner_name = get_summoner_name(summoner_data)
         summoner_icon_url = get_summoner_icon(summoner_data)
-        mastery_data = get_champion_mastery_data(api_key, summoner_data, region)
+        mastery_data = get_champion_mastery_data(api_key, puuid, region)
         organized_mastery_data = organize_champion_data(mastery_data, champion_dict)
 
         # print table
