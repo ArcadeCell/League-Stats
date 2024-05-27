@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from data import champion_dict, api_key, get_champion_mastery_data, organize_champion_data,\
-get_summoner_icon, get_summoner_data, get_summoner_name, get_summoner_id, get_summoner_rank, get_region, get_puuid
+get_summoner_icon, get_account_data, get_summoner_rank, get_summoner_data, region_to_continent
 from prettytable import PrettyTable
 
 
@@ -11,17 +11,24 @@ def index():
     error_message = "Summoner not found. Please check spelling."
     if request.method == "POST":
         region = request.form["region-select"]
-        region = get_region(region)
-        summoner_name = request.form["summoner_name"]
+        continent = region_to_continent(region)
+        gameName = request.form["gameName_tagLine"].split("#")[0].strip()
+        tagLine = request.form["gameName_tagLine"].split("#")[1].strip()
 
-        summoner_data = get_summoner_data(api_key, summoner_name, region)
+        account_data = get_account_data(api_key, gameName, tagLine, continent)
+        if account_data == -1:
+            return render_template("index.html", error_message = error_message)
+
+        gameName = account_data["gameName"]
+        puuid = account_data["puuid"]
+
+        summoner_data = get_summoner_data(api_key, puuid)
         if summoner_data == -1:
             return render_template("index.html", error_message = error_message)
         
-        summoner_id = get_summoner_id(summoner_data)
+        summoner_id = summoner_data["id"]
+
         summoner_rank = get_summoner_rank(summoner_id, region)
-        puuid = get_puuid(summoner_data)
-        summoner_name = get_summoner_name(summoner_data)
         summoner_icon_url = get_summoner_icon(summoner_data)
         mastery_data = get_champion_mastery_data(api_key, puuid, region)
         organized_mastery_data = organize_champion_data(mastery_data, champion_dict)
@@ -50,7 +57,7 @@ def index():
         return render_template("index.html", 
                                table=table_html, 
                                summoner_icon_url=summoner_icon_url, 
-                               summoner_name=summoner_name, 
+                               gameName=gameName, 
                                summoner_rank=summoner_rank,
                               )
     else:

@@ -58,19 +58,23 @@ body {
     background-repeat: repeat;
 }
 
-input#summoner_name{
-    font-size: 16px;
+input#gameName_tagLine{
+    font-size: 15px;
     font-family: Helvetica, sans-serif;
     padding-left: 0;
-    outline: none;
     height: 45px;
     border: none;
 }
-  
+
+input#gameName_tagLine:focus{
+    border: none;
+    outline: none;
+}
+
 select#sort-by{
     width: 300px;
     font-size: 16px;
-    padding: 10px 3%;
+    padding: 10px 0.6rem;
     border-radius: 8px;
     font-family: Helvetica, sans-serif;
     height: 45px;
@@ -85,7 +89,7 @@ form {
 }
 
 label{
-    font-size: calc(0.5vw + 2vh);
+    font-size: 16px;
     font-family: Helvetica, sans-serif;
     color: white;
     display: block;
@@ -126,10 +130,6 @@ label{
 #right_banner{
     right: 0;
 }
-
-/* #left_banner:hover, #right_banner:hover{
-    transform: scale(1.1);
-} */
 
 .error{
     font-family: Helvetica, sans-serif;
@@ -335,10 +335,9 @@ label{
 }
 
 select#region-select.form-select{
-    padding: 0.35rem 2rem 0.35rem 0.5rem;
+    padding: 0.35rem 2rem 0.35rem 0.6rem;
     outline: none;
     box-shadow: none;
-    margin-left: 0;
     font-size: 16px;
     border: none;
     background-color: white;
@@ -346,7 +345,6 @@ select#region-select.form-select{
 
 .region-selector{
     display: inline-block;
-    margin-left: 3%;
 }
 
 .region-summoner{

@@ -18,32 +18,29 @@
         <form method="POST">
             <div class="big_container">
                 <div id="summoner_block" class="search-container">        
-                    <label for="summoner_name">Summoner Name</label>
+                    <label for="gameName_tagLine">Search Summoner</label>
                     <div class="region-summoner">
                         <div class="dropdown region-selector">
                             <label for="region-select" class="visually-hidden">Region</label>
                             <select id="region-select" class="form-select" name="region-select">
-                                <option class="region" value="NA" {% if request.form["region-select"] == "NA" %} selected {% endif %}>NA</option>
-                                <option class="region" value="EUW" {% if request.form["region-select"] == "EUW" %} selected {% endif %}>EUW</option>
-                                <option class="region" value="EUN" {% if request.form["region-select"] == "EUN" %} selected {% endif %}>EUN</option>
+                                <option class="region" value="NA1" {% if request.form["region-select"] == "NA1" %} selected {% endif %}>NA</option>
+                                <option class="region" value="EUW1" {% if request.form["region-select"] == "EUW1" %} selected {% endif %}>EUW</option>
+                                <option class="region" value="EUN1" {% if request.form["region-select"] == "EUN1" %} selected {% endif %}>EUNE</option>
+                                <option class="region" value="OC1" {% if request.form["region-select"] == "OC1" %} selected {% endif %}>OCE</option>
                                 <option class="region" value="KR" {% if request.form["region-select"] == "KR" %} selected {% endif %}>KR</option>
-                                <option class="region" value="JP" {% if request.form["region-select"] == "JP" %} selected {% endif %}>JP</option>
-                                <option class="region" value="BR" {% if request.form["region-select"] == "BR" %} selected {% endif %}>BR</option>
-                                <option class="region" value="OCE" {% if request.form["region-select"] == "OCE" %} selected {% endif %}>OCE</option>
-                                <option class="region" value="LAN" {% if request.form["region-select"] == "LAN" %} selected {% endif %}>LAN</option>
-                                <option class="region" value="LAS" {% if request.form["region-select"] == "LAS" %} selected {% endif %}>LAS</option>
+                                <option class="region" value="JP1" {% if request.form["region-select"] == "JP1" %} selected {% endif %}>JP</option>
+                                <option class="region" value="BR1" {% if request.form["region-select"] == "BR1" %} selected {% endif %}>BR</option>
+                                <option class="region" value="LA1" {% if request.form["region-select"] == "LA1" %} selected {% endif %}>LAN</option>
+                                <option class="region" value="LA2" {% if request.form["region-select"] == "LA2" %} selected {% endif %}>LAS</option>
                                 <option class="region" value="RU" {% if request.form["region-select"] == "RU" %} selected {% endif %}>RU</option>
-                                <option class="region" value="TR" {% if request.form["region-select"] == "TR" %} selected {% endif %}>TR</option>
-                                <option class="region" value="PH" {% if request.form["region-select"] == "PH" %} selected {% endif %}>PH</option>
-                                <option class="region" value="SG" {% if request.form["region-select"] == "SG" %} selected {% endif %}>SG</option>
-                                <option class="region" value="TH" {% if request.form["region-select"] == "TH" %} selected {% endif %}>TH</option>
-                                <option class="region" value="TW" {% if request.form["region-select"] == "TW" %} selected {% endif %}>TW</option>
-                                <option class="region" value="VN" {% if request.form["region-select"] == "VN" %} selected {% endif %}>VN</option>
+                                <option class="region" value="VN2" {% if request.form["region-select"] == "VN2" %} selected {% endif %}>VN</option>
+                                <option class="region" value="TW2" {% if request.form["region-select"] == "TW2" %} selected {% endif %}>TW</option>
                             </select>
                         </div>      
-                        <input type="text" id="summoner_name" name="summoner_name" placeholder="Search Summoner" 
-                        required value="{{ request.form['summoner_name']|default('') }}" 
-                        oninvalid="this.setCustomValidity('Please enter a Summoner name.')"
+                        <input type="text" id="gameName_tagLine" name="gameName_tagLine" placeholder="Game Name + Tagline" 
+                        required value="{{ request.form['gameName_tagLine']|default('') }}"
+                        pattern=".+#.+" 
+                        oninvalid="this.setCustomValidity('Please enter a valid game name AND tagline (e.g. Doublelift#NA1)')"
                         oninput="this.setCustomValidity('')">
                     </div>
                 </div>
@@ -68,11 +65,11 @@
             </div>
         {% endif %}
 
-        {% if summoner_name %}
+        {% if gameName %}
             <div class="summoner-info">
                 <img id="summoner-icon" src="{{ summoner_icon_url }}" alt="Summoner Icon">
                 <div class="container my-container">
-                    <h1 id="summoner-name">{{ summoner_name }}<div class="spinner-border d-none" id="loader" role="status">
+                    <h1 id="summoner-name">{{ gameName }}<div class="spinner-border d-none" id="loader" role="status">
                         <span class="sr-only"></span></div>
                     </h1>
                     <div class="display-rank">

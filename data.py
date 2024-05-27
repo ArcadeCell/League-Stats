@@ -4,31 +4,64 @@ import os
 
 api_key = os.getenv("LEAGUE_API_KEY")
 
-# function to get summoner_data
-def get_summoner_data(api_key, summoner_name, region):
-    # get Encrypted summoner ID from summoner username
-    url = f"https://{region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summoner_name}?api_key={api_key}"
+# function to get account_data
+def get_account_data(api_key, gameName, tagLine, continent):
+    url = f"https://{continent}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{gameName}/{tagLine}?api_key={api_key}"
     response = requests.get(url)
     if response.status_code == 404:
         return -1
-    summoner_data = response.json()
+    data = response.json()
+    account_data = {
+        "puuid": data["puuid"],
+        "gameName": data["gameName"],
+        "tagLine": data["tagLine"], 
+    }
+    return account_data
+
+def region_to_continent(region):
+    if region == "NA1":
+        return "americas"
+    elif region == "EUW1":
+        return "europe"
+    elif region == "EUN1":
+        return "europe"
+    elif region == "OC1":
+        return "asia"
+    elif region == "KR":
+        return "asia"
+    elif region == "JP1":
+        return "asia"
+    elif region == "BR1":
+        return "americas"
+    elif region == "LA1":
+        return "americas"
+    elif region == "LA2":
+        return "americas"
+    elif region == "RU":
+        return "europe"
+    elif region == "VN2":
+        return "asia"
+    elif region == "TW2":
+        return "asia"
+
+def get_summoner_data(api_key, puuid):
+    url = f"https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/{puuid}?api_key={api_key}"
+    response = requests.get(url)
+    if response.status_code == 404:
+        return -1
+    data = response.json()
+    summoner_data = {
+        "id": data["id"],
+        "accountId": data["accountId"],
+        "puuid": data["puuid"],
+        "profileIconId": data["profileIconId"],
+        "revisionDate": data["revisionDate"],
+        "summonerLevel": data["summonerLevel"],
+    }
     return summoner_data
 
-
-def get_summoner_id(data):
-    summoner_id = data["id"]
-    return summoner_id
-
-def get_summoner_name(data):
-    summoner_name = data["name"]
-    return summoner_name
-
-def get_puuid(data):
-    puuid = data["puuid"]
-    return puuid
-
-def get_summoner_rank(summoner_id, region):
-    url = f"https://{region}.api.riotgames.com/lol/league/v4/entries/by-summoner/{summoner_id}?api_key={api_key}"
+def get_summoner_rank(summoner_region, region):
+    url = f"https://{region}.api.riotgames.com/lol/league/v4/entries/by-summoner/{summoner_region}?api_key={api_key}"
     response = requests.get(url)
     data = response.json()
     summoner_rank = {
@@ -89,8 +122,8 @@ def get_champion_mastery_data(api_key, puuid, region):
 
 # function to get summoner icon
 def get_summoner_icon(data):
-    iconId = data["profileIconId"]
-    url = f"http://ddragon.leagueoflegends.com/cdn/{current_patch}/img/profileicon/{iconId}.png"
+    profileIconId = data["profileIconId"]
+    url = f"http://ddragon.leagueoflegends.com/cdn/{current_patch}/img/profileicon/{profileIconId}.png"
     return url
 
 
@@ -109,7 +142,10 @@ def organize_champion_data(data, champion_dict):
         champion_levels.append(obj["championLevel"])
         champion_points.append(obj["championPoints"])
         last_play_times.append(obj["lastPlayTime"])
-        points_until_next_level.append(obj["championPointsUntilNextLevel"])
+        if obj["championPointsUntilNextLevel"] < 0:
+            points_until_next_level.append(0)
+        else:
+            points_until_next_level.append(obj["championPointsUntilNextLevel"])
         chests_granted.append(obj["chestGranted"])
 
     # convert champion IDs to their corresponding champion names
@@ -139,43 +175,6 @@ def organize_champion_data(data, champion_dict):
         "champion_images": champion_images,
     }
     return champion_data
-
-
-def get_region(region):
-    if region == "NA":
-        return "na1"
-    elif region == "EUW":
-        return "euw1"
-    elif region == "EUN":
-        return "eun1"
-    elif region == "KR":
-        return "kr"
-    elif region == "JP":
-        return "jp1"
-    elif region == "BR":
-        return "br1"
-    elif region == "OCE":
-        return "oc1"
-    elif region == "LAN":
-        return "la1"
-    elif region == "LAS":
-        return "la2"
-    elif region == "RU":
-        return "ru"
-    elif region == "TR":
-        return "tr1"
-    elif region == "PH":
-        return "ph2"
-    elif region == "SG":
-        return "sg"
-    elif region == "TH":
-        return "th"
-    elif region == "TW":
-        return "tw2"
-    elif region == "VN":
-        return "vn2"
-    else: 
-        return -1
 
 # set up the API request URL for getting champion names. first get current patch number
 url = "https://ddragon.leagueoflegends.com/api/versions.json"
