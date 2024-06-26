@@ -6,6 +6,9 @@ The application fetches data using the Riot Games API and presents it in an easy
 This application provides a comprehensive and user-friendly interface for League of Legends players to track and analyze their performance. 
 By entering a summoner's name, users can access detailed statistics, historical data, and compare their progress over time.</p>
 
+## User Interface
+<img src="https://github.com/kevintian4/League-Stats/blob/master/static/Interface.png">
+
 ## Features
 - **Summoner Statistics**: View detailed stats for any summoner.
 - **Historical Data**: Track performance over time.
