@@ -1,8 +1,11 @@
 import datetime
 import requests
 import os
+from dotenv import load_dotenv
 
-api_key = os.getenv("LEAGUE_API_KEY")
+load_dotenv()
+
+api_key = os.getenv("api_key")
 
 # function to get account_data
 def get_account_data(api_key, gameName, tagLine, continent):
@@ -134,7 +137,7 @@ def organize_champion_data(data, champion_dict):
     champion_points = []
     last_play_times = []
     points_until_next_level = []
-    chests_granted = []
+    tokens_earned = []
 
     # append values from data to their appropriate arrays
     for obj in data:
@@ -142,11 +145,11 @@ def organize_champion_data(data, champion_dict):
         champion_levels.append(obj["championLevel"])
         champion_points.append(obj["championPoints"])
         last_play_times.append(obj["lastPlayTime"])
+        tokens_earned.append(obj["tokensEarned"])
         if obj["championPointsUntilNextLevel"] < 0:
             points_until_next_level.append(0)
         else:
             points_until_next_level.append(obj["championPointsUntilNextLevel"])
-        chests_granted.append(obj["chestGranted"])
 
     # convert champion IDs to their corresponding champion names
     champion_names = []
@@ -171,7 +174,7 @@ def organize_champion_data(data, champion_dict):
         "champion_points": champion_points,
         "last_played": last_played,
         "points_until_next_level": points_until_next_level,
-        "chests_granted": chests_granted,
+        "tokens_earned": tokens_earned,
         "champion_images": champion_images,
     }
     return champion_data

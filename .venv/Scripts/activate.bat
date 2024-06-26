@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=c:\Users\17789\Desktop\League Stats\.venv
+set VIRTUAL_ENV=C:\Users\17789\Desktop\Projects\Python League Stats\.venv
 
 if not defined PROMPT set PROMPT=$P$G
 

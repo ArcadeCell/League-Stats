@@ -41,14 +41,15 @@ def index():
         table.add_column("Mastery Points", organized_mastery_data["champion_points"])
         table.add_column("Last Played(Days)", organized_mastery_data["last_played"])
         table.add_column("Mastery Points Until Next Level", organized_mastery_data["points_until_next_level"])
-        table.add_column("Chest Granted", organized_mastery_data["chests_granted"])
+        table.add_column("Tokens Earned", organized_mastery_data["tokens_earned"])
 
         user_selected_sort = request.form["sort-by"].title()
         
         if user_selected_sort == "Last Played":
             user_selected_sort = "Last Played(Days)"
 
-        if user_selected_sort == "Mastery Level" or user_selected_sort == "Last Played" or user_selected_sort == "Mastery Points":
+        if user_selected_sort == "Mastery Level" or user_selected_sort == \
+        "Last Played" or user_selected_sort == "Mastery Points" or user_selected_sort == "Tokens Earned":
             table.reversesort = True
 
         table.sortby = user_selected_sort
