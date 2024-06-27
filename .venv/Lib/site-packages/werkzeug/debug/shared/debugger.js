@@ -48,7 +48,7 @@ function initPinBox() {
       btn.disabled = true;
 
       fetch(
-        `${document.location.pathname}?__debugger__=yes&cmd=pinauth&pin=${pin}&s=${encodedSecret}`
+        `${document.location}?__debugger__=yes&cmd=pinauth&pin=${pin}&s=${encodedSecret}`
       )
         .then((res) => res.json())
         .then(({auth, exhausted}) => {
@@ -79,7 +79,7 @@ function promptForPin() {
   if (!EVALEX_TRUSTED) {
     const encodedSecret = encodeURIComponent(SECRET);
     fetch(
-      `${document.location.pathname}?__debugger__=yes&cmd=printpin&s=${encodedSecret}`
+      `${document.location}?__debugger__=yes&cmd=printpin&s=${encodedSecret}`
     );
     const pinPrompt = document.getElementsByClassName("pin-prompt")[0];
     fadeIn(pinPrompt);
@@ -305,7 +305,8 @@ function handleConsoleSubmit(e, command, frameID) {
           wrapperSpan.append(spanToWrap);
           spanToWrap.hidden = true;
 
-          expansionButton.addEventListener("click", () => {
+          expansionButton.addEventListener("click", (event) => {
+            event.preventDefault();
             spanToWrap.hidden = !spanToWrap.hidden;
             expansionButton.classList.toggle("open");
             return false;
