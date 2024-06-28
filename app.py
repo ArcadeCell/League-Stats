@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from data import champion_dict, api_key, get_champion_mastery_data, organize_champion_data,\
 get_summoner_icon, get_account_data, get_summoner_rank, get_summoner_data, region_to_continent
 from prettytable import PrettyTable
+import os
 
 
 app = Flask(__name__)
@@ -64,5 +65,6 @@ def index():
     else:
         return render_template("index.html")
 
-if __name__ == "__main__":
-    app.run(debug=True)
+if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
