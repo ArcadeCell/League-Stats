@@ -2,7 +2,7 @@ import datetime
 import requests
 import os
 
-api_key = "RGAPI-4db19453-0df4-4ddd-8a23-c1d2ae08caf2"
+api_key = os.getenv("api_key")
 
 # function to get account_data
 def get_account_data(api_key, gameName, tagLine, continent):
