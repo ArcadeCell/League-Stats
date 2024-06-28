@@ -3,37 +3,61 @@ html{
     scroll-behavior: smooth;
 }
 
+div.align-content {
+    display: flex;
+    justify-content: left;
+    margin-bottom: 20px;
+}
+
+.table-container {
+    overflow: hidden;
+}
+
 table {
     font-family: Verdana, sans-serif;
     border-collapse: collapse;
     width: 100%;
     color: white;
-    border: 20px solid #4687c0;
 }
 
-div.align-content{
-    display: flex;
-    justify-content: left;
+thead {
+    margin-top: 0;
+    padding-top: 0;
+    position: sticky;
+    top: 0;
+    z-index: 2;
 }
 
-tr, th {
+th, td {
     text-align: center;
-    background-color: #4687c0;
-    font-size: 20px;
-}
-
-td{
-    padding: 1vh 0;
+    padding: 1vh 1vw;
+    font-size: 15px;
+    border-bottom: 1px solid #ddd;
 }
 
 th {
-    padding-bottom: calc(1vh + 0.4vw);
+    background-color: #4687c0;
     font-weight: 700;
-    color: rgb(255, 236, 94);
+    color: yellow;
 }
 
-tr:nth-of-type(2n-1){
+td {
     background-color: #3c7eb8;
+    padding: 1vh 0;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover td {
+    background-color: #285a82;
+}
+
+@media (max-width: 600px) {
+    th, td {
+        padding: 1vh 0.5vw;
+    }
 }
 
 h1{
