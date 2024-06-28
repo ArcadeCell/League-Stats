@@ -18,7 +18,7 @@ By entering a summoner's name, users can access detailed statistics, historical 
 <ul>
   <li><code>app.py</code>: Main application script</li>
   <li><code>data.py</code>: Data fetching and processing logic</li>
-  <li><code>image.py</code>: Image handling or generation logic</li>
+  <li><code>image.py</code>: Function for transforming rank emblems</li>
   <li><code>templates/</code>: HTML templates for rendering web pages</li>
   <li><code>static/</code>: Static files (CSS, JavaScript, images)</li>
   <li><code>requirements.txt</code>: Python dependencies</li>
